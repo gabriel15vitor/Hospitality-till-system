@@ -443,7 +443,6 @@ public class main extends javax.swing.JFrame {
             while(resultSet.next()){
                 beermap.put(resultSet.getString(1), resultSet.getDouble(2));
             }
-            System.out.println(beermap);
             connection.close();
         }catch(Exception ex){
             ex.printStackTrace();
