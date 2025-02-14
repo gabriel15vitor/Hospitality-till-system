@@ -4,16 +4,13 @@
  */
 package till;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.*;
 import desserts.desserts;
 import food.food;
 import drinks.drinks;
-import java.io.IOException;
-import static java.lang.Double.parseDouble;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class main extends javax.swing.JFrame {
     private String quantityStr = ""; // Shared quantity input
-    public HashMap<String, String> beermap = new HashMap<>();
+    public HashMap<String, Double> beermap = new HashMap<>();
     /**
      * Creates new form NewJFrame
      */
@@ -434,18 +431,20 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_corretActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        String url = "jdbc:mysql://localhost:3306/Hospitality";
+        String username = "root";
+        String password = "";
+        
         try{
-            String row;
-            var path = Path.of("src//till//drinksPrice.csv");
-            var reader = Files.newBufferedReader(path);
-            var line = reader.readLine();
-            while(line != null){
-                row = line;
-                String[] column = row.split(",");
-                beermap.put(column[0], column[1]);
-                line = reader.readLine();
-            }   
-            reader.close();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("select * from Beers");
+            while(resultSet.next()){
+                beermap.put(resultSet.getString(1), resultSet.getDouble(2));
+            }
+            System.out.println(beermap);
+            connection.close();
         }catch(Exception ex){
             ex.printStackTrace();
         }
