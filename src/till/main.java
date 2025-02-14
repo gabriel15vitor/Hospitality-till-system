@@ -11,6 +11,8 @@ import desserts.desserts;
 import food.food;
 import drinks.drinks;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,6 +47,23 @@ public class main extends javax.swing.JFrame {
     }
     private void updateQuantityTextField() {
         quantityTextField.setText(quantityStr.isEmpty() ? "" : quantityStr);
+    }
+    
+    public ResultSet updateData(String query){
+        String url = "jdbc:mysql://localhost:3306/Hospitality";
+        String username = "root";
+        String password = "";
+        try{
+        Class.forName("com.mysql.cj.jdbc.Driver");
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                return resultSet;
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return null;
+        }
     }
 
     /**
@@ -431,21 +450,16 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_corretActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        String url = "jdbc:mysql://localhost:3306/Hospitality";
-        String username = "root";
-        String password = "";
-        
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from Beers");
-            while(resultSet.next()){
-                beermap.put(resultSet.getString(1), resultSet.getDouble(2));
+        //ResultSet resultSet = statement.executeQuery("select * from Beers");
+        ResultSet beers = updateData("select * from Beers");
+        if(beers != null){
+            try {
+                while(beers.next()){
+                    beermap.put(beers.getString(1), beers.getDouble(2));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
-            connection.close();
-        }catch(Exception ex){
-            ex.printStackTrace();
         }
     }//GEN-LAST:event_formWindowOpened
 
