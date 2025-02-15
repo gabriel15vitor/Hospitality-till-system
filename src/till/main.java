@@ -22,10 +22,11 @@ import javax.swing.table.DefaultTableModel;
 public class main extends javax.swing.JFrame {
     private String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
-    public HashMap<String, Double> beerOnethird = new HashMap<>();
-    public HashMap<String, Double> beerHalf = new HashMap<>();
-    public HashMap<String, Double> beerTwothird = new HashMap<>();
-    public HashMap<String, Double> beermap = new HashMap<>();
+    public HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
+    public HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
+    public HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
+    public HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
+    public HashMap<String, Double> softPrices = new HashMap<>();
     /**
      * Creates new form NewJFrame
      */
@@ -53,6 +54,14 @@ public class main extends javax.swing.JFrame {
         quantityTextField.setText(quantityStr.isEmpty() ? "" : quantityStr);
     }
     
+    private void updateItems(){
+        updateBeers();
+        updateWines();
+        updateCiders();
+        updateSpirits();
+        updateSoft();
+    }
+    
     private ResultSet updateData(String query){
         String url = "jdbc:mysql://localhost:3306/Hospitality";
         String username = "root";
@@ -74,10 +83,90 @@ public class main extends javax.swing.JFrame {
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    beermap.put(queryResult.getString(1), queryResult.getDouble(2));
-                    beerTwothird.put(queryResult.getString(1), queryResult.getDouble(3));
-                    beerHalf.put(queryResult.getString(1), queryResult.getDouble(4));
-                    beerOnethird.put(queryResult.getString(1), queryResult.getDouble(5));
+                    String name = queryResult.getString(1);
+                    
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("", queryResult.getDouble(2));
+                    prices.put("2/3", queryResult.getDouble(3));
+                    prices.put("Half", queryResult.getDouble(4));
+                    prices.put("1/3", queryResult.getDouble(5));
+                    beerPrices.put(name, prices);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void updateCiders(){
+        queryResult = updateData("select * from Ciders");
+        
+        if(queryResult != null){
+            try {
+                while(queryResult.next()){
+                    String name = queryResult.getString(1);
+                    
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("", queryResult.getDouble(2));
+                    prices.put("2/3", queryResult.getDouble(3));
+                    prices.put("Half", queryResult.getDouble(4));
+                    prices.put("1/3", queryResult.getDouble(5));
+                    ciderPrices.put(name, prices);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void updateWines(){
+        queryResult = updateData("select * from Wines");
+        
+        if(queryResult != null){
+            try {
+                while(queryResult.next()){
+                    String name = queryResult.getString(1);
+                    
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("", queryResult.getDouble(2));
+                    prices.put("250ml", queryResult.getDouble(3));
+                    prices.put("175ml", queryResult.getDouble(4));
+                    prices.put("125ml", queryResult.getDouble(5));
+                    winePrices.put(name, prices);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void updateSpirits(){
+        queryResult = updateData("select * from Spirits");
+        
+        if(queryResult != null){
+            try {
+                while(queryResult.next()){
+                    String name = queryResult.getString(1);
+                    
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("50ml", queryResult.getDouble(2));
+                    prices.put("25ml", queryResult.getDouble(3));
+                    prices.put("", queryResult.getDouble(3));
+                    spiritPrices.put(name, prices);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void updateSoft(){
+        queryResult = updateData("select * from softdrinks");
+        
+        if(queryResult != null){
+            try {
+                while(queryResult.next()){
+                    softPrices.put(queryResult.getString(1), queryResult.getDouble(2));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -467,11 +556,11 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_corretActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        updateBeers();
+        updateItems();
     }//GEN-LAST:event_formWindowOpened
 
     private void updateTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTillActionPerformed
-        updateBeers();
+        updateItems();
     }//GEN-LAST:event_updateTillActionPerformed
 
     /**

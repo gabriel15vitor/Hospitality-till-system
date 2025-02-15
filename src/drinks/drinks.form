@@ -326,9 +326,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lumina1" max="32767" attributes="0"/>
+                                  <Component id="guest1" max="32767" attributes="0"/>
                                   <Component id="twothirds1" pref="130" max="32767" attributes="0"/>
-                                  <Component id="lumina3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="guest2" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="170" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -340,8 +340,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="lumina4" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="lumina2" alignment="0" pref="130" max="32767" attributes="0"/>
+                                          <Component id="guest4" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="guest3" alignment="0" pref="130" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -360,13 +360,13 @@
                               </Group>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lumina1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="lumina2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="guest1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="guest3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="lumina4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="lumina3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="guest4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="guest2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="373" max="32767" attributes="0"/>
                           </Group>
@@ -398,36 +398,36 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onethird1ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="lumina1">
+                    <Component class="javax.swing.JButton" name="guest1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest1"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lumina1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest1ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="lumina2">
+                    <Component class="javax.swing.JButton" name="guest3">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest3"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lumina2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest3ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="lumina3">
+                    <Component class="javax.swing.JButton" name="guest2">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest2"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lumina3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest2ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="lumina4">
+                    <Component class="javax.swing.JButton" name="guest4">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest4"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lumina4ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest4ActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -493,7 +493,7 @@
                           <Component id="twothirds2" min="-2" pref="130" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="half2" min="-2" pref="130" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="onethird2" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -583,11 +583,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="merlot" max="32767" attributes="0"/>
                           <Component id="largewine" pref="149" max="32767" attributes="0"/>
                           <Component id="jTextField6" max="32767" attributes="0"/>
-                          <Component id="jButton2" alignment="1" pref="149" max="32767" attributes="0"/>
-                          <Component id="jButton3" alignment="0" pref="149" max="32767" attributes="0"/>
+                          <Component id="pinotNoir" alignment="1" pref="149" max="32767" attributes="0"/>
+                          <Component id="malbec" alignment="0" pref="149" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -598,15 +598,15 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jButton5" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton6" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton4" alignment="0" pref="149" max="32767" attributes="0"/>
+                                  <Component id="viognier" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pinotGrigio" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="sauvignonBlanc" alignment="0" pref="149" max="32767" attributes="0"/>
                                   <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField7" max="32767" attributes="0"/>
-                                  <Component id="jButton9" pref="140" max="32767" attributes="0"/>
+                                  <Component id="frenchRose" pref="140" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -632,24 +632,24 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jButton3" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="malbec" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="merlot" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jButton4" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="jButton9" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="sauvignonBlanc" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="frenchRose" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton6" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="pinotGrigio" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jButton2" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="jButton5" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="pinotNoir" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="viognier" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="284" max="32767" attributes="0"/>
                   </Group>
@@ -669,11 +669,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="125ml"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="smallwineActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="largewine">
               <Properties>
                 <Property name="text" type="java.lang.String" value="250ml"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="largewineActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField5">
               <Properties>
@@ -696,40 +702,61 @@
                 <Property name="text" type="java.lang.String" value="Rose"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="merlot">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Merlot"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="merlotActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="pinotNoir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pinot noir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinotNoirActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="malbec">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Malbec"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="malbecActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton4">
+            <Component class="javax.swing.JButton" name="sauvignonBlanc">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sauvignon Blanc"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sauvignonBlancActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="viognier">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Viognier"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viognierActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton6">
+            <Component class="javax.swing.JButton" name="pinotGrigio">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pinot Grigio"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinotGrigioActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="frenchRose">
               <Properties>
                 <Property name="text" type="java.lang.String" value="French Rose"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="frenchRoseActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -751,25 +778,25 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField9" max="32767" attributes="0"/>
-                                  <Component id="jButton14" alignment="0" pref="110" max="32767" attributes="0"/>
-                                  <Component id="jButton18" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="whiteGin" alignment="0" pref="110" max="32767" attributes="0"/>
+                                  <Component id="pinkGin" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField11" max="32767" attributes="0"/>
-                                  <Component id="jButton15" max="32767" attributes="0"/>
-                                  <Component id="jButton20" pref="110" max="32767" attributes="0"/>
+                                  <Component id="whiteRum" max="32767" attributes="0"/>
+                                  <Component id="spicedRum" pref="110" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField8" max="32767" attributes="0"/>
-                                  <Component id="jButton19" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton16" alignment="0" pref="110" max="32767" attributes="0"/>
+                                  <Component id="foreignWhisky" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bourbon" alignment="0" pref="110" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField10" max="32767" attributes="0"/>
-                                  <Component id="jButton17" pref="110" max="32767" attributes="0"/>
+                                  <Component id="absolut" pref="110" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -800,20 +827,20 @@
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton14" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="jButton15" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="jButton16" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="jButton17" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="whiteGin" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="whiteRum" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="bourbon" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="absolut" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jButton18" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="pinkGin" min="-2" pref="34" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="jButton20" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="jButton19" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="spicedRum" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="foreignWhisky" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -833,65 +860,96 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="25ml"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleShotActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField8">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Whisky"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField9">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Gin"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField10">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Vodka"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField11">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Rum"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField11ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton14">
+            <Component class="javax.swing.JButton" name="whiteGin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="White"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="whiteGinActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton15">
+            <Component class="javax.swing.JButton" name="whiteRum">
               <Properties>
                 <Property name="text" type="java.lang.String" value="White rum"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="whiteRumActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton16">
+            <Component class="javax.swing.JButton" name="bourbon">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bourbon"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bourbonActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton17">
+            <Component class="javax.swing.JButton" name="absolut">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Absolut"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="absolutActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton18">
+            <Component class="javax.swing.JButton" name="pinkGin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pink"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinkGinActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton19">
+            <Component class="javax.swing.JButton" name="foreignWhisky">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Foreign whisky"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="foreignWhiskyActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton20">
+            <Component class="javax.swing.JButton" name="spicedRum">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Spiced rum"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spicedRumActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -910,9 +968,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton7" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton8" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton10" alignment="0" pref="126" max="32767" attributes="0"/>
+                          <Component id="coke" alignment="0" max="32767" attributes="0"/>
+                          <Component id="dietCoke" alignment="0" max="32767" attributes="0"/>
+                          <Component id="orangeJuice" alignment="0" pref="126" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="711" max="32767" attributes="0"/>
                   </Group>
@@ -922,31 +980,40 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="jButton7" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="coke" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton8" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="dietCoke" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton10" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="orangeJuice" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace pref="394" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButton7">
+            <Component class="javax.swing.JButton" name="coke">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Coke"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cokeActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton8">
+            <Component class="javax.swing.JButton" name="dietCoke">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Diet coke"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dietCokeActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton10">
+            <Component class="javax.swing.JButton" name="orangeJuice">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Orange Juice"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orangeJuiceActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
