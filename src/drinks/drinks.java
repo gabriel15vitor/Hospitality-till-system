@@ -12,6 +12,7 @@ import till.main;
  * @author gabri
  */
 public class drinks extends javax.swing.JPanel {
+    private String size="";
     private JTable table;
     private main parent;
     /**
@@ -23,24 +24,33 @@ public class drinks extends javax.swing.JPanel {
         this.parent = parent; // Reference to main
     }
     
-    public Double getprice(String name){
-        return parent.beermap.get(name);
+    public Double getprice(String name, String size){
+        Double r;
+        switch(size){
+            case "2/3" -> r = parent.beerTwothird.get(name);
+            case "Half" -> r = parent.beerHalf.get(name);
+            case "1/3" -> r = parent.beerOnethird.get(name);
+            default -> r = parent.beermap.get(name);
+        }
+        return r;
     }
     
     public void addBeer(String name){
-        Double price = getprice(name.toLowerCase());
+        Double price = getprice(name.toLowerCase(), size);
         
         String quantityStr = parent.getQuantityStr();// Get the quantity from the main class
         int quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
-
+        size = size.isEmpty() ? "Pint" : size;
+        
         // Add the row to the table
         if(price != null){
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.addRow(new Object[]{quantity, name, price*quantity});
+            model.addRow(new Object[]{quantity, size, name, price*quantity});
         }
 
         // Clear the quantity in the main class
         parent.clearQuantity();
+        size="";
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +99,6 @@ public class drinks extends javax.swing.JPanel {
         onethird2 = new javax.swing.JButton();
         applecider = new javax.swing.JButton();
         cherrycider = new javax.swing.JButton();
-        spirits = new javax.swing.JPanel();
         wines = new javax.swing.JPanel();
         mediumwine = new javax.swing.JButton();
         smallwine = new javax.swing.JButton();
@@ -104,6 +113,20 @@ public class drinks extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
+        spirits = new javax.swing.JPanel();
+        doubleShot = new javax.swing.JButton();
+        singleShot = new javax.swing.JButton();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
         softDrinks = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -238,32 +261,31 @@ public class drinks extends javax.swing.JPanel {
                         .addComponent(twothirds, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(half, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(onethird, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SirenBeersLayout.createSequentialGroup()
-                        .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(soundwave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lumina, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(mesmerist, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(59, 59, 59)
+                        .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(mesmerist, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(lumina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(soundwave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                         .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(santo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(stationhill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pastel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                         .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(brokendream, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(shattereddream, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                         .addGroup(SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pomp, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(secondserve, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 30, Short.MAX_VALUE))))
         );
         SirenBeersLayout.setVerticalGroup(
             SirenBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,11 +387,11 @@ public class drinks extends javax.swing.JPanel {
                     .addComponent(lumina1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(twothirds1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(lumina3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(98, 98, 98)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
                 .addGroup(GuestBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(GuestBeersLayout.createSequentialGroup()
                         .addComponent(half1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
                         .addComponent(onethird1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81))
                     .addGroup(GuestBeersLayout.createSequentialGroup()
@@ -394,7 +416,7 @@ public class drinks extends javax.swing.JPanel {
                 .addGroup(GuestBeersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lumina4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lumina3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(285, Short.MAX_VALUE))
+                .addContainerGap(373, Short.MAX_VALUE))
         );
 
         Beers.addTab("Guest", GuestBeers);
@@ -472,7 +494,7 @@ public class drinks extends javax.swing.JPanel {
                 .addGap(163, 163, 163)
                 .addComponent(onethird2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(SirenBeers1Layout.createSequentialGroup()
-                .addContainerGap(140, Short.MAX_VALUE)
+                .addContainerGap(272, Short.MAX_VALUE)
                 .addComponent(applecider, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117)
                 .addComponent(cherrycider, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -502,23 +524,10 @@ public class drinks extends javax.swing.JPanel {
             CidersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CidersLayout.createSequentialGroup()
                 .addComponent(SirenBeers1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 251, Short.MAX_VALUE))
+                .addGap(0, 339, Short.MAX_VALUE))
         );
 
         drinks.addTab("Ciders", Ciders);
-
-        javax.swing.GroupLayout spiritsLayout = new javax.swing.GroupLayout(spirits);
-        spirits.setLayout(spiritsLayout);
-        spiritsLayout.setHorizontalGroup(
-            spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 724, Short.MAX_VALUE)
-        );
-        spiritsLayout.setVerticalGroup(
-            spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 495, Short.MAX_VALUE)
-        );
-
-        drinks.addTab("Spirits", spirits);
 
         mediumwine.setText("175ml");
         mediumwine.addActionListener(new java.awt.event.ActionListener() {
@@ -570,22 +579,22 @@ public class drinks extends javax.swing.JPanel {
                     .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE))
                 .addGap(85, 85, 85)
-                .addGroup(winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(winesLayout.createSequentialGroup()
                         .addComponent(mediumwine, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(smallwine, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(85, 85, 85)
+                        .addComponent(smallwine, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
                     .addGroup(winesLayout.createSequentialGroup()
                         .addGroup(winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(74, 74, 74)
+                        .addGap(85, 85, 85)
                         .addGroup(winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField7)
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
         winesLayout.setVerticalGroup(
             winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -617,10 +626,109 @@ public class drinks extends javax.swing.JPanel {
                 .addGroup(winesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(284, Short.MAX_VALUE))
         );
 
         drinks.addTab("Wines", wines);
+
+        doubleShot.setText("50ml");
+        doubleShot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doubleShotActionPerformed(evt);
+            }
+        });
+
+        singleShot.setText("25ml");
+
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setText("Whisky");
+
+        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField9.setText("Gin");
+
+        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField10.setText("Vodka");
+
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField11.setText("Rum");
+
+        jButton14.setText("White");
+
+        jButton15.setText("White rum");
+
+        jButton16.setText("Bourbon");
+
+        jButton17.setText("Absolut");
+
+        jButton18.setText("Pink");
+
+        jButton19.setText("Foreign whisky");
+
+        jButton20.setText("Spiced rum");
+
+        javax.swing.GroupLayout spiritsLayout = new javax.swing.GroupLayout(spirits);
+        spirits.setLayout(spiritsLayout);
+        spiritsLayout.setHorizontalGroup(
+            spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(spiritsLayout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spiritsLayout.createSequentialGroup()
+                        .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField9)
+                            .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField11)
+                            .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField8)
+                            .addComponent(jButton19)
+                            .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField10)
+                            .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, spiritsLayout.createSequentialGroup()
+                        .addComponent(doubleShot, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(singleShot, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(125, 125, 125)))
+                .addContainerGap(218, Short.MAX_VALUE))
+        );
+        spiritsLayout.setVerticalGroup(
+            spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(spiritsLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(doubleShot, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(singleShot, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
+                .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(spiritsLayout.createSequentialGroup()
+                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(280, 280, 280))
+                    .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        drinks.addTab("Spirits", spirits);
 
         jButton7.setText("Coke");
 
@@ -638,7 +746,7 @@ public class drinks extends javax.swing.JPanel {
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                .addContainerGap(579, Short.MAX_VALUE))
+                .addContainerGap(711, Short.MAX_VALUE))
         );
         softDrinksLayout.setVerticalGroup(
             softDrinksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -649,7 +757,7 @@ public class drinks extends javax.swing.JPanel {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addContainerGap(394, Short.MAX_VALUE))
         );
 
         drinks.addTab("Soft/Hot", softDrinks);
@@ -679,15 +787,15 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_luminaActionPerformed
 
     private void onethirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethirdActionPerformed
-        // TODO add your handling code here:
+        size = "1/3";
     }//GEN-LAST:event_onethirdActionPerformed
 
     private void halfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_halfActionPerformed
-        // TODO add your handling code here:
+        size = "Half";
     }//GEN-LAST:event_halfActionPerformed
 
     private void twothirdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirdsActionPerformed
-        // TODO add your handling code here:
+        size = "2/3";
     }//GEN-LAST:event_twothirdsActionPerformed
 
     private void soundwaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soundwaveActionPerformed
@@ -719,15 +827,15 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_shattereddreamActionPerformed
 
     private void twothirds1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirds1ActionPerformed
-        // TODO add your handling code here:
+        size = "2/3";
     }//GEN-LAST:event_twothirds1ActionPerformed
 
     private void half1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_half1ActionPerformed
-        // TODO add your handling code here:
+        size = "Half";
     }//GEN-LAST:event_half1ActionPerformed
 
     private void onethird1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethird1ActionPerformed
-        // TODO add your handling code here:
+        size = "1/3";
     }//GEN-LAST:event_onethird1ActionPerformed
 
     private void lumina1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lumina1ActionPerformed
@@ -747,15 +855,15 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_lumina4ActionPerformed
 
     private void twothirds2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirds2ActionPerformed
-        // TODO add your handling code here:
+        size = "2/3";
     }//GEN-LAST:event_twothirds2ActionPerformed
 
     private void half2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_half2ActionPerformed
-        // TODO add your handling code here:
+        size = "Half";
     }//GEN-LAST:event_half2ActionPerformed
 
     private void onethird2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethird2ActionPerformed
-        // TODO add your handling code here:
+        size = "1/3";
     }//GEN-LAST:event_onethird2ActionPerformed
 
     private void appleciderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appleciderActionPerformed
@@ -770,6 +878,10 @@ public class drinks extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_mediumwineActionPerformed
 
+    private void doubleShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doubleShotActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_doubleShotActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane Beers;
@@ -782,13 +894,21 @@ public class drinks extends javax.swing.JPanel {
     private javax.swing.JPanel beers;
     private javax.swing.JButton brokendream;
     private javax.swing.JButton cherrycider;
+    private javax.swing.JButton doubleShot;
     private javax.swing.JTabbedPane drinks;
     private javax.swing.JButton half;
     private javax.swing.JButton half1;
     private javax.swing.JButton half2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -798,12 +918,16 @@ public class drinks extends javax.swing.JPanel {
     private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton largewine;
     private javax.swing.JButton lumina;
     private javax.swing.JButton lumina1;
@@ -820,6 +944,7 @@ public class drinks extends javax.swing.JPanel {
     private javax.swing.JButton santo;
     private javax.swing.JButton secondserve;
     private javax.swing.JButton shattereddream;
+    private javax.swing.JButton singleShot;
     private javax.swing.JButton smallwine;
     private javax.swing.JPanel softDrinks;
     private javax.swing.JButton soundwave;
