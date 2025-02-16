@@ -68,6 +68,7 @@ public class drinks extends javax.swing.JPanel {
     
     public void addDrink(String name, String type){
         Double price = getprice(name.toLowerCase(), size, type);
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         
         if(price != null){
             String quantityStr = parent.getQuantityStr();// Get the quantity from the main class
@@ -83,13 +84,14 @@ public class drinks extends javax.swing.JPanel {
             }
 
             // Add the row to the table
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            
             model.addRow(new Object[]{quantity, size, name, price*quantity});
         }
 
         // Clear the quantity in the main class
         parent.clearQuantity();
         size="";
+        parent.sumItems(model);
     }
     /**
      * This method is called from within the constructor to initialize the form.

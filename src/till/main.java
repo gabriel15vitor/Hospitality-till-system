@@ -10,6 +10,7 @@ import java.sql.*;
 import desserts.desserts;
 import food.food;
 import drinks.drinks;
+import static java.lang.Double.parseDouble;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class main extends javax.swing.JFrame {
     private String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
+    
     public HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
     public HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
     public HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
@@ -54,7 +56,7 @@ public class main extends javax.swing.JFrame {
         quantityTextField.setText(quantityStr.isEmpty() ? "" : quantityStr);
     }
     
-    private void updateItems(){
+    private void updateDrinks(){
         updateBeers();
         updateWines();
         updateCiders();
@@ -171,6 +173,28 @@ public class main extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+    
+    public void sumItems(DefaultTableModel model){
+        int rows = model.getRowCount();
+        int remove = 0;
+        if(rows >= 1){
+            String number, total;
+            double sum = 0;
+            
+
+            for(int i = 0; i < rows; i++){
+                total = model.getValueAt(i, 2).toString();
+                if("Total".equals(total)){
+                    remove=i;
+                }else{
+                    number = model.getValueAt(i, 3).toString();
+                    sum += parseDouble(number);
+                }
+            }
+            if(remove != 0){ model.removeRow(remove);}
+            model.addRow(new Object[]{null, null, "Total", sum});
         }
     }
 
@@ -547,20 +571,28 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_zeroActionPerformed
 
     private void corretActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_corretActionPerformed
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
         int row = table.getSelectedRow();
-        
         if(row >= 0){
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.removeRow(row);
+            String total = model.getValueAt(row, 2).toString();
+            if(!total.equals("Total") && (model.getRowCount() > 2) ){
+                model.removeRow(row);
+                sumItems(model);
+            }else{
+                if((model.getRowCount() == 2) && "Total".equals(model.getValueAt(1, 2).toString())){
+                    model.removeRow(0);
+                    model.removeRow(0);
+                }
+            }
         }
     }//GEN-LAST:event_corretActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        updateItems();
+        updateDrinks();
     }//GEN-LAST:event_formWindowOpened
 
     private void updateTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTillActionPerformed
-        updateItems();
+        updateDrinks();
     }//GEN-LAST:event_updateTillActionPerformed
 
     /**
