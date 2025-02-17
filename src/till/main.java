@@ -11,9 +11,13 @@ import food.desserts;
 import food.food;
 import drinks.drinks;
 import static java.lang.Double.parseDouble;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,15 +25,19 @@ import javax.swing.table.DefaultTableModel;
  * @author gabri
  */
 public class main extends javax.swing.JFrame {
+    private static final String url = "jdbc:mysql://localhost:3306/Hospitality";
+    private static final String username = "root";
+    private static final String password = "";
     private String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
     String size = "";
-    public HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
-    public HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
-    public HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
-    public HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
-    public HashMap<String, Double> softPrices = new HashMap<>();
-    public HashMap<String, Double> foodPrices = new HashMap<>();
+    private HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
+    private HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
+    private HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
+    private HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
+    private HashMap<String, Double> softPrices = new HashMap<>();
+    private HashMap<String, Double> foodPrices = new HashMap<>();
+    private HashMap<String, Integer> ids = new HashMap<>();
     /**
      * Creates new form NewJFrame
      */
@@ -39,6 +47,8 @@ public class main extends javax.swing.JFrame {
         contentPanel.add(new drinks(this), "Drinks");
         contentPanel.add(new food(this), "Food");
         contentPanel.add(new desserts(this), "Desserts");
+        contentPanel.add(new payment(this), "Payment");
+        contentPanel.add(new receipts(this), "Receipts");
         updateQuantityTextField();
     }
     
@@ -66,10 +76,7 @@ public class main extends javax.swing.JFrame {
         updateFood();
     }
     
-    private ResultSet updateData(String query){
-        String url = "jdbc:mysql://localhost:3306/Hospitality";
-        String username = "root";
-        String password = "";
+    public ResultSet updateData(String query){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
@@ -81,8 +88,19 @@ public class main extends javax.swing.JFrame {
         }
     }
     
+    private void insert(String query){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.executeUpdate();
+        }catch(ClassNotFoundException | SQLException ex){
+            System.out.println(ex);
+        }
+    }
+    
     private void updateBeers(){
-        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird` FROM `drinks` WHERE `Type_of_Drink` = 'Beer'");
+        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird`, `ID` FROM `drinks` WHERE `Type_of_Drink` = 'Beer'");
         
         if(queryResult != null){
             try {
@@ -94,6 +112,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("Half", queryResult.getDouble(4));
                     prices.put("1/3", queryResult.getDouble(5));
                     beerPrices.put(name, prices);
+                    ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,7 +121,7 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateCiders(){
-        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird` FROM `drinks` WHERE `Type_of_Drink` = 'Cider'");
+        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird`, `ID` FROM `drinks` WHERE `Type_of_Drink` = 'Cider'");
         
         if(queryResult != null){
             try {
@@ -115,6 +134,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("Half", queryResult.getDouble(4));
                     prices.put("1/3", queryResult.getDouble(5));
                     ciderPrices.put(name, prices);
+                    ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +143,7 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateWines(){
-        queryResult = updateData("SELECT `Name`, `Bottle`, `250ml`, `175ml`, `125ml` FROM `drinks` WHERE `Type_of_Drink` = 'Wine'");
+        queryResult = updateData("SELECT `Name`, `Bottle`, `250ml`, `175ml`, `125ml`, `ID` FROM `drinks` WHERE `Type_of_Drink` = 'Wine'");
         
         if(queryResult != null){
             try {
@@ -136,6 +156,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("175ml", queryResult.getDouble(4));
                     prices.put("125ml", queryResult.getDouble(5));
                     winePrices.put(name, prices);
+                    ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -144,7 +165,7 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateSpirits(){
-        queryResult = updateData("SELECT `Name`, `50ml`, `25ml` FROM `drinks` WHERE `Type_of_Drink` = 'Spirit'");
+        queryResult = updateData("SELECT `Name`, `50ml`, `25ml`, `ID` FROM `drinks` WHERE `Type_of_Drink` = 'Spirit'");
         
         if(queryResult != null){
             try {
@@ -156,6 +177,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("25ml", queryResult.getDouble(3));
                     prices.put("", queryResult.getDouble(3));
                     spiritPrices.put(name, prices);
+                    ids.put(name, queryResult.getInt(4));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,12 +186,13 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateSoft(){
-        queryResult = updateData("SELECT `Name`, `Bottle` FROM `drinks` WHERE `Type_of_Drink` = 'Soft'");
+        queryResult = updateData("SELECT `Name`, `Bottle`, `ID` FROM `drinks` WHERE `Type_of_Drink` = 'Soft'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
                     softPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
+                    ids.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getInt(3));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -178,12 +201,13 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateFood(){
-        queryResult = updateData("SELECT `Name`, `Price` FROM `food`");
+        queryResult = updateData("SELECT `Name`, `Price`, `ID` FROM `food`");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
                     foodPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
+                    ids.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getInt(3));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,7 +229,11 @@ public class main extends javax.swing.JFrame {
                     remove=i;
                 }else{
                     number = model.getValueAt(i, 3).toString();
-                    sum += parseDouble(number);
+                    if(!"Paid".equals(total)){
+                        sum += parseDouble(number);
+                    }else{
+                        sum -= parseDouble(number);
+                    }
                 }
             }
             if(remove != 0){ model.removeRow(remove);}
@@ -219,9 +247,18 @@ public class main extends javax.swing.JFrame {
         Double price = foodPrices.get(name);
         
         if(price != null){
-            String quantityString = getQuantityStr();// Get the quantity from the main class
-            int quantity = quantityString.isEmpty() ? 1 : Integer.parseInt(quantityString);
-
+            String removeDouble = "";// Get the quantity from the main class
+            //This if removes the decimal part of the string so it wont affect the size or price
+            int i = 0, quantity, index = quantityStr.indexOf(".");
+            if(index == -1){
+                quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
+            }else{
+                while(i != index){
+                    removeDouble += quantityStr.charAt(i);
+                    i++;
+                }
+                quantity = Integer.parseInt(removeDouble);
+            }
             // Add the row to the table
             model.addRow(new Object[]{quantity, "", name1, price*quantity});
         }
@@ -281,8 +318,21 @@ public class main extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         
         if(price != null){
-            String quantityStr = getQuantityStr();// Get the quantity from the main class
-            int quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
+            String removeDouble = "";// Get the quantity from the main class
+            int index = quantityStr.indexOf(".");
+            int quantity, i=0;
+            
+            //This if removes the decimal part of the string so it wont affect the size or price
+            if(index == -1){
+                quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
+            }else{
+                while(i != index){
+                    removeDouble += quantityStr.charAt(i);
+                    i++;
+                }
+                quantity = Integer.parseInt(removeDouble);
+            }
+            
             if(size.isEmpty()){
                 switch(type){
                     case "beer" -> size = "Pint";
@@ -302,6 +352,121 @@ public class main extends javax.swing.JFrame {
         size="";
         sumItems(model);
     }
+    
+    public String getCurrentDateTime() {
+        // Get the current date and time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Format the date and time (optional)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // Return the formatted date and time as a string
+        return now.format(formatter);
+    }
+    
+    public void sendPayment(String type_of_payment){
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        int rows = model.getRowCount();
+        String query="INSERT INTO `transactions`(`transaction_date`, `total_amount`, `items`, `Transaction_type`) VALUES ('replace Date','replace Total Amount','Replace items','type_of_payment');";
+        String findTotal = model.getValueAt(rows-1, 2).toString();
+        Double amount = null;
+        String items = "";
+        Boolean execute = false;
+        
+        if("Total".equals(findTotal)){
+            
+            if(quantityStr.isEmpty()){
+                amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+                for(int i=0; i < rows-1; i++){
+                    if(!model.getValueAt(i, 2).toString().equals("Paid")){
+                        int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
+                        for(int j=0; j < lastdigit;j++){
+                            items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""));
+                            if((j != lastdigit-1) || (i != rows-2)){
+                                items += " ";
+                            } 
+                        }
+                    }else{
+                        amount += Double.parseDouble(model.getValueAt(i, 3).toString());
+                    }
+                }
+                for(int i=0; i < rows; i++){
+                    model.removeRow(0);
+                }
+                execute = true;
+            }else{
+                Double tableAmount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+                amount = Double.parseDouble(quantityStr);
+                if((tableAmount-amount) != 0){
+                    if((tableAmount-amount) > 0){
+                        model.removeRow(rows-1);
+                        model.addRow(new Object[]{null, null, "Paid", amount});
+                        model.addRow(new Object[]{null, null, "Total", tableAmount-amount});
+                    }else{
+                        JOptionPane.showMessageDialog(
+                            null, // Parent component (null for center of screen)
+                            "The amount inserted is too high, try again.", // Message to display
+                            "Error", // Title of the dialog window
+                            JOptionPane.ERROR_MESSAGE // Type of message (ERROR_MESSAGE for error icon)
+                        );
+                    }
+                }else{
+                    amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+                    for(int i=0; i < rows-1; i++){
+                        if(!model.getValueAt(i, 2).toString().equals("Paid")){
+                            int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
+                            for(int j=0; j < lastdigit;j++){
+                                items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""));
+                                if((j != lastdigit-1) || (i != rows-2)){
+                                    items += " ";
+                                } 
+                            }
+                        }else{
+                            amount += Double.parseDouble(model.getValueAt(i, 3).toString());
+                        }
+                    }
+                    for(int i=0; i < rows; i++){
+                        model.removeRow(0);
+                    }
+                    execute = true;
+                }
+            }
+            
+        }
+        if(execute){
+        //removes the last space from the string
+            if(" ".equals(items.substring(items.length()-1))){
+                items = items.substring(0, items.length()-1);
+            }
+            query = query.replace("replace Date", getCurrentDateTime());
+            query = query.replace("replace Total Amount", amount.toString());
+            query = query.replace("Replace items", items);
+            query = query.replace("type_of_payment", type_of_payment);
+            insert(query);
+        }
+        clearQuantity(); 
+    }
+    
+    public void updateTable(JTable r){
+        queryResult = updateData("SELECT `transaction_id`, `transaction_date`, `total_amount`, `items`, `Transaction_type` FROM `transactions`");
+        //DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) r.getModel();
+        int i = model.getRowCount();
+        while(i != 0){
+            model.removeRow(0);
+            i = model.getRowCount();
+        }
+        try {
+            while(queryResult.next()){
+                int id = queryResult.getInt(1);
+                String date = queryResult.getString(2);
+                double total = queryResult.getDouble(3);
+                model.addRow(new Object[]{id, date, total});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -318,9 +483,14 @@ public class main extends javax.swing.JFrame {
         desserts = new javax.swing.JButton();
         configPanel = new javax.swing.JPanel();
         corret = new javax.swing.JButton();
+        paidOrders = new javax.swing.JButton();
+        refund = new javax.swing.JButton();
+        refundBack = new javax.swing.JButton();
+        pay = new javax.swing.JButton();
         updateTill = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        staffDrinks = new javax.swing.JButton();
+        blockItem = new javax.swing.JButton();
+        enableItem = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
         javax.swing.JButton eight = new javax.swing.JButton();
         javax.swing.JButton seven = new javax.swing.JButton();
@@ -334,6 +504,7 @@ public class main extends javax.swing.JFrame {
         javax.swing.JButton zero = new javax.swing.JButton();
         javax.swing.JButton clear = new javax.swing.JButton();
         quantityTextField = new javax.swing.JTextField();
+        point = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -366,6 +537,8 @@ public class main extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        table.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setShowGrid(true);
         table.getTableHeader().setReorderingAllowed(false);
         table.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -380,7 +553,7 @@ public class main extends javax.swing.JFrame {
             table.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        drinks.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        drinks.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         drinks.setText("Drinks");
         drinks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +561,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        food.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        food.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         food.setText("Food");
         food.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,7 +569,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        desserts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        desserts.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         desserts.setText("Desserts");
         desserts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,6 +579,7 @@ public class main extends javax.swing.JFrame {
 
         configPanel.setBackground(new java.awt.Color(153, 255, 255));
 
+        corret.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         corret.setText("Error corret");
         corret.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,6 +587,29 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        paidOrders.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        paidOrders.setText("Paid orders");
+        paidOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paidOrdersActionPerformed(evt);
+            }
+        });
+
+        refund.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        refund.setText("Refund");
+
+        refundBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        refundBack.setText("Refund back to Stock");
+
+        pay.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        pay.setText("Pay");
+        pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payActionPerformed(evt);
+            }
+        });
+
+        updateTill.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         updateTill.setText("Update Till");
         updateTill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -420,43 +617,77 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Paid orders");
+        staffDrinks.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        staffDrinks.setText("Staff Food/Drink");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setText("Pay");
+        blockItem.setText("Block Item");
+
+        enableItem.setText("Enable Item");
 
         javax.swing.GroupLayout configPanelLayout = new javax.swing.GroupLayout(configPanel);
         configPanel.setLayout(configPanelLayout);
         configPanelLayout.setHorizontalGroup(
             configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(corret, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-            .addComponent(updateTill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(corret, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(configPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(configPanelLayout.createSequentialGroup()
+                        .addComponent(paidOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(configPanelLayout.createSequentialGroup()
+                        .addComponent(blockItem, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(enableItem, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(refund, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refundBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(staffDrinks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, configPanelLayout.createSequentialGroup()
+                        .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(pay, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(updateTill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         configPanelLayout.setVerticalGroup(
             configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configPanelLayout.createSequentialGroup()
                 .addComponent(corret, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(paidOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(refund, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refundBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(staffDrinks, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(blockItem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enableItem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(updateTill, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14))
         );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
+            .addGap(0, 455, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGap(0, 487, Short.MAX_VALUE)
         );
 
+        eight.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         eight.setText("8");
         eight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -464,6 +695,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        seven.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         seven.setText("7");
         seven.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -471,6 +703,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        nine.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         nine.setText("9");
         nine.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,6 +711,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        four.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         four.setText("4");
         four.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -485,6 +719,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        five.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         five.setText("5");
         five.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -492,6 +727,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        six.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         six.setText("6");
         six.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -499,6 +735,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        one.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         one.setText("1");
         one.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -506,6 +743,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        two.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         two.setText("2");
         two.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -513,6 +751,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        three.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         three.setText("3");
         three.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -520,6 +759,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        zero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         zero.setText("0");
         zero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -527,6 +767,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        clear.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clear.setText("Clear");
         clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -536,6 +777,14 @@ public class main extends javax.swing.JFrame {
 
         quantityTextField.setEditable(false);
 
+        point.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        point.setText(".");
+        point.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pointActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -544,78 +793,80 @@ public class main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(four, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(seven, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(eight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(zero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(four, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(seven, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(eight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(six, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(nine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(zero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(three, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                    .addComponent(point, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                        .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                        .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(configPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(seven, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(six, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(four, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(zero, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(configPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(seven, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(six, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(four, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(zero, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                            .addComponent(point, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(configPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -710,6 +961,20 @@ public class main extends javax.swing.JFrame {
         updateItems();
     }//GEN-LAST:event_updateTillActionPerformed
 
+    private void payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payActionPerformed
+        java.awt.CardLayout cl = (java.awt.CardLayout) contentPanel.getLayout();
+        cl.show(contentPanel, "Payment"); // Switch to Payment Panel
+    }//GEN-LAST:event_payActionPerformed
+
+    private void pointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointActionPerformed
+        appendToQuantity(".");
+    }//GEN-LAST:event_pointActionPerformed
+
+    private void paidOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paidOrdersActionPerformed
+        java.awt.CardLayout cl = (java.awt.CardLayout) contentPanel.getLayout();
+        cl.show(contentPanel, "Receipts"); // Switch to Receipts Panel
+    }//GEN-LAST:event_paidOrdersActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -747,16 +1012,22 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton blockItem;
     private javax.swing.JPanel configPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton corret;
     private javax.swing.JButton desserts;
     private javax.swing.JButton drinks;
+    private javax.swing.JButton enableItem;
     private javax.swing.JButton food;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton paidOrders;
+    private javax.swing.JButton pay;
+    private javax.swing.JButton point;
     private javax.swing.JTextField quantityTextField;
+    private javax.swing.JButton refund;
+    private javax.swing.JButton refundBack;
+    private javax.swing.JButton staffDrinks;
     public javax.swing.JTable table;
     private javax.swing.JButton updateTill;
     // End of variables declaration//GEN-END:variables
