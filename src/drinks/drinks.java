@@ -4,94 +4,19 @@
  */
 package drinks;
 
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import till.main;
 /**
  *
  * @author gabri
  */
 public class drinks extends javax.swing.JPanel {
-    private String size="";
-    private JTable table;
     private main parent;
     /**
      * Creates new form beer
      */
-    public drinks(JTable table, main parent) {
+    public drinks(main parent) {
         initComponents();
-        this.table = table; // Assign the passed table reference
         this.parent = parent; // Reference to main
-    }
-    public Double getprice(String name, String size, String type){
-        Double r = null;
-        switch(type){
-            
-            case "beer" -> {
-                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = parent.beerPrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-            
-            case "cider" -> {
-                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = parent.ciderPrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-                
-            case "wine" -> {
-                if(size.equals("") || size.equals("250ml") || size.equals("175ml") || size.equals("125ml")){
-                    r = parent.winePrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-                
-            case "spirit" -> {
-                if(size.equals("") || size.equals("50ml") || size.equals("25ml")){
-                    r = parent.spiritPrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-                
-            case "soft" -> {
-                r = parent.softPrices.get(name);  
-            }
-        }
-        return r;
-    }
-    
-    public void addDrink(String name, String type){
-        Double price = getprice(name.toLowerCase(), size, type);
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
-        if(price != null){
-            String quantityStr = parent.getQuantityStr();// Get the quantity from the main class
-            int quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
-            if(size.isEmpty()){
-                switch(type){
-                    case "beer" -> size = "Pint";
-                    case "cider" -> size = "Pint";
-                    case "wine" -> size = "Bottle";
-                    case "spirit" -> size = "25ml";
-                    case "soft" -> size = "Bottle"; 
-                }
-            }
-
-            // Add the row to the table
-            
-            model.addRow(new Object[]{quantity, size, name, price*quantity});
-        }
-
-        // Clear the quantity in the main class
-        parent.clearQuantity();
-        size="";
-        parent.sumItems(model);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -110,36 +35,36 @@ public class drinks extends javax.swing.JPanel {
         twothirds = new javax.swing.JButton();
         half = new javax.swing.JButton();
         onethird = new javax.swing.JButton();
-        lumina = new javax.swing.JButton();
-        mesmerist = new javax.swing.JButton();
-        pastel = new javax.swing.JButton();
-        shattereddream = new javax.swing.JButton();
-        santo = new javax.swing.JButton();
-        secondserve = new javax.swing.JButton();
-        soundwave = new javax.swing.JButton();
-        pomp = new javax.swing.JButton();
-        stationhill = new javax.swing.JButton();
+        javax.swing.JButton lumina = new javax.swing.JButton();
+        javax.swing.JButton mesmerist = new javax.swing.JButton();
+        javax.swing.JButton pastel = new javax.swing.JButton();
+        javax.swing.JButton shattereddream = new javax.swing.JButton();
+        javax.swing.JButton santo = new javax.swing.JButton();
+        javax.swing.JButton secondserve = new javax.swing.JButton();
+        javax.swing.JButton soundwave = new javax.swing.JButton();
+        javax.swing.JButton pomp = new javax.swing.JButton();
+        javax.swing.JButton stationhill = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        brokendream = new javax.swing.JButton();
+        javax.swing.JButton brokendream = new javax.swing.JButton();
         GuestBeers = new javax.swing.JPanel();
         twothirds1 = new javax.swing.JButton();
         half1 = new javax.swing.JButton();
         onethird1 = new javax.swing.JButton();
-        guest1 = new javax.swing.JButton();
-        guest3 = new javax.swing.JButton();
-        guest2 = new javax.swing.JButton();
-        guest4 = new javax.swing.JButton();
+        javax.swing.JButton guest1 = new javax.swing.JButton();
+        javax.swing.JButton guest3 = new javax.swing.JButton();
+        javax.swing.JButton guest2 = new javax.swing.JButton();
+        javax.swing.JButton guest4 = new javax.swing.JButton();
         Cans = new javax.swing.JPanel();
         Ciders = new javax.swing.JPanel();
         SirenBeers1 = new javax.swing.JPanel();
         twothirds2 = new javax.swing.JButton();
         half2 = new javax.swing.JButton();
         onethird2 = new javax.swing.JButton();
-        applecider = new javax.swing.JButton();
-        cherrycider = new javax.swing.JButton();
+        javax.swing.JButton applecider = new javax.swing.JButton();
+        javax.swing.JButton cherrycider = new javax.swing.JButton();
         wines = new javax.swing.JPanel();
         mediumwine = new javax.swing.JButton();
         smallwine = new javax.swing.JButton();
@@ -147,13 +72,13 @@ public class drinks extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        merlot = new javax.swing.JButton();
-        pinotNoir = new javax.swing.JButton();
-        malbec = new javax.swing.JButton();
-        sauvignonBlanc = new javax.swing.JButton();
-        viognier = new javax.swing.JButton();
-        pinotGrigio = new javax.swing.JButton();
-        frenchRose = new javax.swing.JButton();
+        javax.swing.JButton merlot = new javax.swing.JButton();
+        javax.swing.JButton pinotNoir = new javax.swing.JButton();
+        javax.swing.JButton malbec = new javax.swing.JButton();
+        javax.swing.JButton sauvignonBlanc = new javax.swing.JButton();
+        javax.swing.JButton viognier = new javax.swing.JButton();
+        javax.swing.JButton pinotGrigio = new javax.swing.JButton();
+        javax.swing.JButton frenchRose = new javax.swing.JButton();
         spirits = new javax.swing.JPanel();
         doubleShot = new javax.swing.JButton();
         singleShot = new javax.swing.JButton();
@@ -161,17 +86,17 @@ public class drinks extends javax.swing.JPanel {
         jTextField9 = new javax.swing.JTextField();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
-        whiteGin = new javax.swing.JButton();
-        whiteRum = new javax.swing.JButton();
-        bourbon = new javax.swing.JButton();
-        absolut = new javax.swing.JButton();
-        pinkGin = new javax.swing.JButton();
-        foreignWhisky = new javax.swing.JButton();
-        spicedRum = new javax.swing.JButton();
+        javax.swing.JButton whiteGin = new javax.swing.JButton();
+        javax.swing.JButton whiteRum = new javax.swing.JButton();
+        javax.swing.JButton bourbon = new javax.swing.JButton();
+        javax.swing.JButton absolut = new javax.swing.JButton();
+        javax.swing.JButton pinkGin = new javax.swing.JButton();
+        javax.swing.JButton foreignWhisky = new javax.swing.JButton();
+        javax.swing.JButton spicedRum = new javax.swing.JButton();
         softDrinks = new javax.swing.JPanel();
-        coke = new javax.swing.JButton();
-        dietCoke = new javax.swing.JButton();
-        orangeJuice = new javax.swing.JButton();
+        javax.swing.JButton coke = new javax.swing.JButton();
+        javax.swing.JButton dietCoke = new javax.swing.JButton();
+        javax.swing.JButton orangeJuice = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -855,12 +780,11 @@ public class drinks extends javax.swing.JPanel {
                     .addComponent(absolut, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(spiritsLayout.createSequentialGroup()
-                        .addComponent(pinkGin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(280, 280, 280))
+                    .addComponent(pinkGin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(spiritsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(spicedRum, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(foreignWhisky, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(foreignWhisky, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         drinks.addTab("Spirits", spirits);
@@ -925,67 +849,67 @@ public class drinks extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pompActionPerformed
-        addDrink("Grapefruit", "beer");
+        parent.addDrink("Grape Fruit", "beer");
     }//GEN-LAST:event_pompActionPerformed
 
     private void secondserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondserveActionPerformed
-        addDrink("SecondServe", "beer");
+        parent.addDrink("Second Serve", "beer");
     }//GEN-LAST:event_secondserveActionPerformed
 
     private void luminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luminaActionPerformed
-       addDrink("Lumina", "beer"); 
+        parent.addDrink("Lumina", "beer"); 
     }//GEN-LAST:event_luminaActionPerformed
 
     private void onethirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethirdActionPerformed
-        size = "1/3";
+        parent.setDrinksSize("1/3");
     }//GEN-LAST:event_onethirdActionPerformed
 
     private void halfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_halfActionPerformed
-        size = "Half";
+        parent.setDrinksSize("Half");
     }//GEN-LAST:event_halfActionPerformed
 
     private void twothirdsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirdsActionPerformed
-        size = "2/3";
+        parent.setDrinksSize("2/3");
     }//GEN-LAST:event_twothirdsActionPerformed
 
     private void soundwaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soundwaveActionPerformed
-        addDrink("Soundwave", "beer");
+        parent.addDrink("Soundwave", "beer");
     }//GEN-LAST:event_soundwaveActionPerformed
 
     private void mesmeristActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesmeristActionPerformed
-        addDrink("Mesmerist", "beer");
+        parent.addDrink("Mesmerist", "beer");
     }//GEN-LAST:event_mesmeristActionPerformed
 
     private void pastelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pastelActionPerformed
-        addDrink("Pastel", "beer");
+        parent.addDrink("Pastel", "beer");
     }//GEN-LAST:event_pastelActionPerformed
 
     private void stationhillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stationhillActionPerformed
-        addDrink("StationHill", "beer");
+        parent.addDrink("Station Hill", "beer");
     }//GEN-LAST:event_stationhillActionPerformed
 
     private void santoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_santoActionPerformed
-        addDrink("Santo", "beer");
+        parent.addDrink("Santo", "beer");
     }//GEN-LAST:event_santoActionPerformed
 
     private void brokendreamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brokendreamActionPerformed
-        addDrink("BrokenDream", "beer");
+        parent.addDrink("Broken Dream", "beer");
     }//GEN-LAST:event_brokendreamActionPerformed
 
     private void shattereddreamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shattereddreamActionPerformed
-        addDrink("ShatteredDream", "beer");
+        parent.addDrink("Shattered Dream", "beer");
     }//GEN-LAST:event_shattereddreamActionPerformed
 
     private void twothirds1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirds1ActionPerformed
-        size = "2/3";
+        parent.setDrinksSize("2/3");
     }//GEN-LAST:event_twothirds1ActionPerformed
 
     private void half1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_half1ActionPerformed
-        size = "Half";
+        parent.setDrinksSize("Half");
     }//GEN-LAST:event_half1ActionPerformed
 
     private void onethird1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethird1ActionPerformed
-        size = "1/3";
+        parent.setDrinksSize("1/3");
     }//GEN-LAST:event_onethird1ActionPerformed
 
     private void guest1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guest1ActionPerformed
@@ -1005,79 +929,79 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_guest4ActionPerformed
 
     private void twothirds2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twothirds2ActionPerformed
-        size = "2/3";
+        parent.setDrinksSize("2/3");
     }//GEN-LAST:event_twothirds2ActionPerformed
 
     private void half2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_half2ActionPerformed
-        size = "Half";
+        parent.setDrinksSize("Half");
     }//GEN-LAST:event_half2ActionPerformed
 
     private void onethird2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethird2ActionPerformed
-        size = "1/3";
+        parent.setDrinksSize("1/3");
     }//GEN-LAST:event_onethird2ActionPerformed
 
     private void appleciderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appleciderActionPerformed
-        addDrink("AppleCider", "cider");
+        parent.addDrink("Apple Cider", "cider");
     }//GEN-LAST:event_appleciderActionPerformed
 
     private void cherryciderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cherryciderActionPerformed
-        addDrink("CherryCider", "cider");
+        parent.addDrink("Cherry Cider", "cider");
     }//GEN-LAST:event_cherryciderActionPerformed
 
     private void mediumwineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediumwineActionPerformed
-        size = "175ml";
+        parent.setDrinksSize("175ml");
     }//GEN-LAST:event_mediumwineActionPerformed
 
     private void doubleShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doubleShotActionPerformed
-        size = "50ml";
+        parent.setDrinksSize("50ml");
     }//GEN-LAST:event_doubleShotActionPerformed
 
     private void singleShotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleShotActionPerformed
-        size = "25ml";
+        parent.setDrinksSize("25ml");
     }//GEN-LAST:event_singleShotActionPerformed
 
     private void largewineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_largewineActionPerformed
-        size = "250ml";
+        parent.setDrinksSize("250ml");
     }//GEN-LAST:event_largewineActionPerformed
 
     private void smallwineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smallwineActionPerformed
-        size = "125ml";
+        parent.setDrinksSize("125ml");
     }//GEN-LAST:event_smallwineActionPerformed
 
     private void malbecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_malbecActionPerformed
-        addDrink("Malbec", "wine");
+        parent.addDrink("Malbec", "wine");
     }//GEN-LAST:event_malbecActionPerformed
 
     private void merlotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_merlotActionPerformed
-        addDrink("Merlot", "wine");
+        parent.addDrink("Merlot", "wine");
     }//GEN-LAST:event_merlotActionPerformed
 
     private void pinotNoirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinotNoirActionPerformed
-        addDrink("PinotNoir", "wine");
+        parent.addDrink("Pinot Noir", "wine");
     }//GEN-LAST:event_pinotNoirActionPerformed
 
     private void sauvignonBlancActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sauvignonBlancActionPerformed
-        addDrink("SauvignonBlanc", "wine");
+        parent.addDrink("Sauvignon Blanc", "wine");
     }//GEN-LAST:event_sauvignonBlancActionPerformed
 
     private void pinotGrigioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinotGrigioActionPerformed
-        addDrink("PinotGrigio", "wine");
+        parent.addDrink("Pinot Grigio", "wine");
     }//GEN-LAST:event_pinotGrigioActionPerformed
 
     private void viognierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viognierActionPerformed
-        addDrink("Viognier", "wine");
+        parent.addDrink("Viognier", "wine");
     }//GEN-LAST:event_viognierActionPerformed
 
     private void frenchRoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_frenchRoseActionPerformed
-        addDrink("FrenchRose", "wine");
+        parent.addDrink("French Rose", "wine");
     }//GEN-LAST:event_frenchRoseActionPerformed
 
     private void whiteGinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteGinActionPerformed
-        addDrink("WhiteGin", "spirit");
+        parent.addDrink("White Gin", "spirit");
     }//GEN-LAST:event_whiteGinActionPerformed
 
     private void pinkGinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pinkGinActionPerformed
-        addDrink("PinkGin", "spirit");
+        parent.addDrink("Pink Gin", "spirit");
     }//GEN-LAST:event_pinkGinActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
@@ -1085,35 +1009,35 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField11ActionPerformed
 
     private void whiteRumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_whiteRumActionPerformed
-        addDrink("WhiteRum", "spirit");
+        parent.addDrink("White Rum", "spirit");
     }//GEN-LAST:event_whiteRumActionPerformed
 
     private void spicedRumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_spicedRumActionPerformed
-        addDrink("SpicedRum", "spirit");
+        parent.addDrink("Spiced Rum", "spirit");
     }//GEN-LAST:event_spicedRumActionPerformed
 
     private void bourbonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bourbonActionPerformed
-        addDrink("Bourbon", "spirit");
+        parent.addDrink("Bourbon", "spirit");
     }//GEN-LAST:event_bourbonActionPerformed
 
     private void foreignWhiskyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foreignWhiskyActionPerformed
-        addDrink("ForeignWhisky", "spirit");
+        parent.addDrink("Foreign Whisky", "spirit");
     }//GEN-LAST:event_foreignWhiskyActionPerformed
 
     private void absolutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_absolutActionPerformed
-        addDrink("Absolut", "spirit");
+        parent.addDrink("Absolut", "spirit");
     }//GEN-LAST:event_absolutActionPerformed
 
     private void cokeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cokeActionPerformed
-        addDrink("Coke", "soft");
+        parent.addDrink("Coke", "soft");
     }//GEN-LAST:event_cokeActionPerformed
 
     private void dietCokeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dietCokeActionPerformed
-        addDrink("DietCoke", "soft");
+        parent.addDrink("Diet Coke", "soft");
     }//GEN-LAST:event_dietCokeActionPerformed
 
     private void orangeJuiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orangeJuiceActionPerformed
-        addDrink("OrangeJuice", "soft");
+        parent.addDrink("Orange Juice", "soft");
     }//GEN-LAST:event_orangeJuiceActionPerformed
 
 
@@ -1124,22 +1048,9 @@ public class drinks extends javax.swing.JPanel {
     private javax.swing.JPanel GuestBeers;
     private javax.swing.JPanel SirenBeers;
     private javax.swing.JPanel SirenBeers1;
-    private javax.swing.JButton absolut;
-    private javax.swing.JButton applecider;
     private javax.swing.JPanel beers;
-    private javax.swing.JButton bourbon;
-    private javax.swing.JButton brokendream;
-    private javax.swing.JButton cherrycider;
-    private javax.swing.JButton coke;
-    private javax.swing.JButton dietCoke;
     private javax.swing.JButton doubleShot;
     private javax.swing.JTabbedPane drinks;
-    private javax.swing.JButton foreignWhisky;
-    private javax.swing.JButton frenchRose;
-    private javax.swing.JButton guest1;
-    private javax.swing.JButton guest2;
-    private javax.swing.JButton guest3;
-    private javax.swing.JButton guest4;
     private javax.swing.JButton half;
     private javax.swing.JButton half1;
     private javax.swing.JButton half2;
@@ -1156,37 +1067,17 @@ public class drinks extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton largewine;
-    private javax.swing.JButton lumina;
-    private javax.swing.JButton malbec;
     private javax.swing.JButton mediumwine;
-    private javax.swing.JButton merlot;
-    private javax.swing.JButton mesmerist;
     private javax.swing.JButton onethird;
     private javax.swing.JButton onethird1;
     private javax.swing.JButton onethird2;
-    private javax.swing.JButton orangeJuice;
-    private javax.swing.JButton pastel;
-    private javax.swing.JButton pinkGin;
-    private javax.swing.JButton pinotGrigio;
-    private javax.swing.JButton pinotNoir;
-    private javax.swing.JButton pomp;
-    private javax.swing.JButton santo;
-    private javax.swing.JButton sauvignonBlanc;
-    private javax.swing.JButton secondserve;
-    private javax.swing.JButton shattereddream;
     private javax.swing.JButton singleShot;
     private javax.swing.JButton smallwine;
     private javax.swing.JPanel softDrinks;
-    private javax.swing.JButton soundwave;
-    private javax.swing.JButton spicedRum;
     private javax.swing.JPanel spirits;
-    private javax.swing.JButton stationhill;
     private javax.swing.JButton twothirds;
     private javax.swing.JButton twothirds1;
     private javax.swing.JButton twothirds2;
-    private javax.swing.JButton viognier;
-    private javax.swing.JButton whiteGin;
-    private javax.swing.JButton whiteRum;
     private javax.swing.JPanel wines;
     // End of variables declaration//GEN-END:variables
 }

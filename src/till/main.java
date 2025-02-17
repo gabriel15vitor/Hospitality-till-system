@@ -7,7 +7,7 @@ package till;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
-import desserts.desserts;
+import food.desserts;
 import food.food;
 import drinks.drinks;
 import static java.lang.Double.parseDouble;
@@ -23,21 +23,22 @@ import javax.swing.table.DefaultTableModel;
 public class main extends javax.swing.JFrame {
     private String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
-    
+    String size = "";
     public HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
     public HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
     public HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
     public HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
     public HashMap<String, Double> softPrices = new HashMap<>();
+    public HashMap<String, Double> foodPrices = new HashMap<>();
     /**
      * Creates new form NewJFrame
      */
     public main() {
         initComponents();
         contentPanel.setLayout(new java.awt.CardLayout());
-        contentPanel.add(new drinks(table, this), "Drinks");
-        contentPanel.add(new food(), "Food");
-        contentPanel.add(new desserts(), "Desserts");
+        contentPanel.add(new drinks(this), "Drinks");
+        contentPanel.add(new food(this), "Food");
+        contentPanel.add(new desserts(this), "Desserts");
         updateQuantityTextField();
     }
     
@@ -56,12 +57,13 @@ public class main extends javax.swing.JFrame {
         quantityTextField.setText(quantityStr.isEmpty() ? "" : quantityStr);
     }
     
-    private void updateDrinks(){
+    private void updateItems(){
         updateBeers();
         updateWines();
         updateCiders();
         updateSpirits();
         updateSoft();
+        updateFood();
     }
     
     private ResultSet updateData(String query){
@@ -80,13 +82,12 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateBeers(){
-        queryResult = updateData("select * from Beers");
+        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird` FROM `drinks` WHERE `Type_of_Drink` = 'Beer'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    String name = queryResult.getString(1);
-                    
+                    String name = queryResult.getString(1).toLowerCase().replace(" ", "");
                     HashMap<String, Double> prices = new HashMap<>();
                     prices.put("", queryResult.getDouble(2));
                     prices.put("2/3", queryResult.getDouble(3));
@@ -101,12 +102,12 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateCiders(){
-        queryResult = updateData("select * from Ciders");
+        queryResult = updateData("SELECT `Name`, `Pint`, `Twothirds`, `Half`, `OneThird` FROM `drinks` WHERE `Type_of_Drink` = 'Cider'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    String name = queryResult.getString(1);
+                    String name = queryResult.getString(1).toLowerCase().replace(" ", "");
                     
                     HashMap<String, Double> prices = new HashMap<>();
                     prices.put("", queryResult.getDouble(2));
@@ -122,12 +123,12 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateWines(){
-        queryResult = updateData("select * from Wines");
+        queryResult = updateData("SELECT `Name`, `Bottle`, `250ml`, `175ml`, `125ml` FROM `drinks` WHERE `Type_of_Drink` = 'Wine'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    String name = queryResult.getString(1);
+                    String name = queryResult.getString(1).toLowerCase().replace(" ", "");
                     
                     HashMap<String, Double> prices = new HashMap<>();
                     prices.put("", queryResult.getDouble(2));
@@ -143,12 +144,12 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateSpirits(){
-        queryResult = updateData("select * from Spirits");
+        queryResult = updateData("SELECT `Name`, `50ml`, `25ml` FROM `drinks` WHERE `Type_of_Drink` = 'Spirit'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    String name = queryResult.getString(1);
+                    String name = queryResult.getString(1).toLowerCase().replace(" ", "");
                     
                     HashMap<String, Double> prices = new HashMap<>();
                     prices.put("50ml", queryResult.getDouble(2));
@@ -163,12 +164,26 @@ public class main extends javax.swing.JFrame {
     }
     
     private void updateSoft(){
-        queryResult = updateData("select * from softdrinks");
+        queryResult = updateData("SELECT `Name`, `Bottle` FROM `drinks` WHERE `Type_of_Drink` = 'Soft'");
         
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    softPrices.put(queryResult.getString(1), queryResult.getDouble(2));
+                    softPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void updateFood(){
+        queryResult = updateData("SELECT `Name`, `Price` FROM `food`");
+        
+        if(queryResult != null){
+            try {
+                while(queryResult.next()){
+                    foodPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +212,96 @@ public class main extends javax.swing.JFrame {
             model.addRow(new Object[]{null, null, "Total", sum});
         }
     }
+    
+    public void addFood(String name1){
+        String name = name1.toLowerCase().replace(" ", "");
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        Double price = foodPrices.get(name);
+        
+        if(price != null){
+            String quantityString = getQuantityStr();// Get the quantity from the main class
+            int quantity = quantityString.isEmpty() ? 1 : Integer.parseInt(quantityString);
 
+            // Add the row to the table
+            model.addRow(new Object[]{quantity, "", name1, price*quantity});
+        }
+        
+        // Clear the quantity in the main class
+        clearQuantity();
+        //generates the total spending
+        sumItems(model);
+    }
+    
+    public void setDrinksSize(String drinksSize){
+        size = drinksSize;
+    }
+    
+    public void addDrink(String name1, String type){
+        Double r = null;
+        String name = name1.toLowerCase().replace(" ", "");
+        switch(type){
+            
+            case "beer" -> {
+                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
+                    r = beerPrices.get(name).get(size);
+                }else{
+                    r = null;
+                }
+            }
+            
+            case "cider" -> {
+                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
+                    r = ciderPrices.get(name).get(size);
+                }else{
+                    r = null;
+                }
+            }
+                
+            case "wine" -> {
+                if(size.equals("") || size.equals("250ml") || size.equals("175ml") || size.equals("125ml")){
+                    r = winePrices.get(name).get(size);
+                }else{
+                    r = null;
+                }
+            }
+                
+            case "spirit" -> {
+                if(size.equals("") || size.equals("50ml") || size.equals("25ml")){
+                    r = spiritPrices.get(name).get(size);
+                }else{
+                    r = null;
+                }
+            }
+                
+            case "soft" -> {
+                r = softPrices.get(name);  
+            }
+        }
+        Double price = r;
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        
+        if(price != null){
+            String quantityStr = getQuantityStr();// Get the quantity from the main class
+            int quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
+            if(size.isEmpty()){
+                switch(type){
+                    case "beer" -> size = "Pint";
+                    case "cider" -> size = "Pint";
+                    case "wine" -> size = "Bottle";
+                    case "spirit" -> size = "25ml";
+                    case "soft" -> size = "Bottle"; 
+                }
+            }
+
+            // Add the row to the table
+            model.addRow(new Object[]{quantity, size, name1, price*quantity});
+        }
+
+        // Clear the quantity in the main class
+        clearQuantity();
+        size="";
+        sumItems(model);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -215,18 +319,20 @@ public class main extends javax.swing.JFrame {
         configPanel = new javax.swing.JPanel();
         corret = new javax.swing.JButton();
         updateTill = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
-        eight = new javax.swing.JButton();
-        seven = new javax.swing.JButton();
-        nine = new javax.swing.JButton();
-        four = new javax.swing.JButton();
-        five = new javax.swing.JButton();
-        six = new javax.swing.JButton();
-        one = new javax.swing.JButton();
-        two = new javax.swing.JButton();
-        three = new javax.swing.JButton();
-        zero = new javax.swing.JButton();
-        clear = new javax.swing.JButton();
+        javax.swing.JButton eight = new javax.swing.JButton();
+        javax.swing.JButton seven = new javax.swing.JButton();
+        javax.swing.JButton nine = new javax.swing.JButton();
+        javax.swing.JButton four = new javax.swing.JButton();
+        javax.swing.JButton five = new javax.swing.JButton();
+        javax.swing.JButton six = new javax.swing.JButton();
+        javax.swing.JButton one = new javax.swing.JButton();
+        javax.swing.JButton two = new javax.swing.JButton();
+        javax.swing.JButton three = new javax.swing.JButton();
+        javax.swing.JButton zero = new javax.swing.JButton();
+        javax.swing.JButton clear = new javax.swing.JButton();
         quantityTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -236,6 +342,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        table.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -273,6 +380,7 @@ public class main extends javax.swing.JFrame {
             table.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        drinks.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         drinks.setText("Drinks");
         drinks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -280,6 +388,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        food.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         food.setText("Food");
         food.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,6 +396,7 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        desserts.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         desserts.setText("Desserts");
         desserts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,32 +420,41 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Paid orders");
+
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton2.setText("Pay");
+
         javax.swing.GroupLayout configPanelLayout = new javax.swing.GroupLayout(configPanel);
         configPanel.setLayout(configPanelLayout);
         configPanelLayout.setHorizontalGroup(
             configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(corret, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
             .addComponent(updateTill, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         configPanelLayout.setVerticalGroup(
             configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(configPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(corret, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(corret, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(updateTill, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout contentPanelLayout = new javax.swing.GroupLayout(contentPanel);
         contentPanel.setLayout(contentPanelLayout);
         contentPanelLayout.setHorizontalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 586, Short.MAX_VALUE)
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 505, Short.MAX_VALUE)
         );
 
         eight.setText("8");
@@ -422,40 +541,36 @@ public class main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(quantityTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(zero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(four, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                                    .addComponent(one, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                                    .addComponent(seven, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(eight, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nine, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(five, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(six, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(clear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(four, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(seven, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(one, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(eight, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(five, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(two, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(six, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(three, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(zero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                         .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -588,11 +703,11 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_corretActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        updateDrinks();
+        updateItems();
     }//GEN-LAST:event_formWindowOpened
 
     private void updateTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateTillActionPerformed
-        updateDrinks();
+        updateItems();
     }//GEN-LAST:event_updateTillActionPerformed
 
     /**
@@ -632,26 +747,17 @@ public class main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton clear;
     private javax.swing.JPanel configPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JButton corret;
     private javax.swing.JButton desserts;
     private javax.swing.JButton drinks;
-    private javax.swing.JButton eight;
-    private javax.swing.JButton five;
     private javax.swing.JButton food;
-    private javax.swing.JButton four;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton nine;
-    private javax.swing.JButton one;
     private javax.swing.JTextField quantityTextField;
-    private javax.swing.JButton seven;
-    private javax.swing.JButton six;
     public javax.swing.JTable table;
-    private javax.swing.JButton three;
-    private javax.swing.JButton two;
     private javax.swing.JButton updateTill;
-    private javax.swing.JButton zero;
     // End of variables declaration//GEN-END:variables
 }
