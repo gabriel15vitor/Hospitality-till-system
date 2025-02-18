@@ -4,6 +4,11 @@
  */
 package till;
 
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class receipts extends javax.swing.JPanel {
     private main parent;
+    private String preference = "";
     /**
      * Creates new form receipts
      */
@@ -33,6 +39,8 @@ public class receipts extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersTable = new javax.swing.JTable();
         refresh = new javax.swing.JButton();
+        printReceipt = new javax.swing.JButton();
+        viewOrder = new javax.swing.JButton();
 
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -45,14 +53,14 @@ public class receipts extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Date", "Total"
+                "ID", "Date", "Time", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -66,10 +74,26 @@ public class receipts extends javax.swing.JPanel {
         jScrollPane1.setViewportView(ordersTable);
 
         refresh.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        refresh.setText("Refresh");
+        refresh.setText("Find");
         refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshActionPerformed(evt);
+            }
+        });
+
+        printReceipt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        printReceipt.setText("Print Receipt");
+        printReceipt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printReceiptActionPerformed(evt);
+            }
+        });
+
+        viewOrder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        viewOrder.setText("View Order");
+        viewOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewOrderActionPerformed(evt);
             }
         });
 
@@ -81,7 +105,11 @@ public class receipts extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 224, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(viewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(printReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,8 +117,13 @@ public class receipts extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(viewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(printReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -100,13 +133,49 @@ public class receipts extends javax.swing.JPanel {
     }//GEN-LAST:event_formFocusGained
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-        parent.updateTable(ordersTable);
+        parent.updateTable(ordersTable, (preference.isEmpty() ? "`transaction_id`": preference));
     }//GEN-LAST:event_refreshActionPerformed
+
+    private void printReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReceiptActionPerformed
+        
+    }//GEN-LAST:event_printReceiptActionPerformed
+
+    private void viewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderActionPerformed
+        String receipt = "";
+        int row = ordersTable.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+        String transactionID = model.getValueAt(row, 1).toString();
+        var queryResult = parent.updateData("SELECT * FROM `transactions` WHERE `transaction_id` = insertID;".replace("insertID", transactionID));
+        try {
+            //queryResult.next();//only onece because ID is unique for every transaction
+            var date = queryResult.getString(2).substring(0,10);
+            var time = queryResult.getString(2).substring(11);
+            var total = queryResult.getString(3);
+            var items = queryResult.getString(4).split(" ");
+            var transactionType = queryResult.getString(5);
+            HashMap<Integer, String> invertedIds = new HashMap<>();
+            for (String i : parent.ids.keySet()) {
+                invertedIds.put(parent.ids.get(i), i);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        JOptionPane.showMessageDialog(
+            null, // Parent component (null for center of screen)
+            receipt, // Message to display
+            "Receipt", // Title of the dialog window
+            JOptionPane.PLAIN_MESSAGE // Type of message
+        );
+    }//GEN-LAST:event_viewOrderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable ordersTable;
+    private javax.swing.JButton printReceipt;
     private javax.swing.JButton refresh;
+    private javax.swing.JButton viewOrder;
     // End of variables declaration//GEN-END:variables
 }

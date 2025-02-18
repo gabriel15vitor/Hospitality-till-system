@@ -464,7 +464,7 @@ public class drinks extends javax.swing.JPanel {
                 .addComponent(applecider, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(117, 117, 117)
                 .addComponent(cherrycider, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(159, 159, 159))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         SirenBeers1Layout.setVerticalGroup(
             SirenBeers1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

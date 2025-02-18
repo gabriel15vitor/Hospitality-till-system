@@ -557,7 +557,7 @@
                           <Component id="applecider" min="-2" pref="145" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                           <Component id="cherrycider" min="-2" pref="163" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                          <EmptySpace pref="159" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

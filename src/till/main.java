@@ -37,7 +37,7 @@ public class main extends javax.swing.JFrame {
     private HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
     private HashMap<String, Double> softPrices = new HashMap<>();
     private HashMap<String, Double> foodPrices = new HashMap<>();
-    private HashMap<String, Integer> ids = new HashMap<>();
+    public HashMap<String, Integer> ids = new HashMap<>();
     /**
      * Creates new form NewJFrame
      */
@@ -52,17 +52,16 @@ public class main extends javax.swing.JFrame {
         updateQuantityTextField();
     }
     
-    public String getQuantityStr() {
-        return quantityStr; // Access the current quantity
-    }
     public void appendToQuantity(String number) {
         quantityStr += number; // Append number to the quantity
         updateQuantityTextField(); // Update the text field
     }
+    
     public void clearQuantity() {
         quantityStr = ""; // Clear the quantity
         updateQuantityTextField(); // Clear the text field
     }
+    
     private void updateQuantityTextField() {
         quantityTextField.setText(quantityStr.isEmpty() ? "" : quantityStr);
     }
@@ -271,6 +270,7 @@ public class main extends javax.swing.JFrame {
     
     public void setDrinksSize(String drinksSize){
         size = drinksSize;
+        sizeDisplay.setText(size);
     }
     
     public void addDrink(String name1, String type){
@@ -312,6 +312,7 @@ public class main extends javax.swing.JFrame {
                 
             case "soft" -> {
                 r = softPrices.get(name);  
+                size = "Bottle";
             }
         }
         Double price = r;
@@ -339,7 +340,6 @@ public class main extends javax.swing.JFrame {
                     case "cider" -> size = "Pint";
                     case "wine" -> size = "Bottle";
                     case "spirit" -> size = "25ml";
-                    case "soft" -> size = "Bottle"; 
                 }
             }
 
@@ -351,6 +351,7 @@ public class main extends javax.swing.JFrame {
         clearQuantity();
         size="";
         sumItems(model);
+        setDrinksSize(size);
     }
     
     public String getCurrentDateTime() {
@@ -368,23 +369,21 @@ public class main extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int rows = model.getRowCount();
         String query="INSERT INTO `transactions`(`transaction_date`, `total_amount`, `items`, `Transaction_type`) VALUES ('replace Date','replace Total Amount','Replace items','type_of_payment');";
-        String findTotal = model.getValueAt(rows-1, 2).toString();
         Double amount = null;
         String items = "";
         Boolean execute = false;
+        Double tableAmount;
         
-        if("Total".equals(findTotal)){
-            
-            if(quantityStr.isEmpty()){
+        if("Total".equals(model.getValueAt(rows-1, 2).toString())){
+            tableAmount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+            if(!quantityStr.isEmpty()){ amount = Double.parseDouble(quantityStr); }
+            if((quantityStr.isEmpty()) || ((tableAmount-amount) == 0)){
                 amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
                 for(int i=0; i < rows-1; i++){
                     if(!model.getValueAt(i, 2).toString().equals("Paid")){
                         int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
                         for(int j=0; j < lastdigit;j++){
-                            items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""));
-                            if((j != lastdigit-1) || (i != rows-2)){
-                                items += " ";
-                            } 
+                            items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""))+"<->"+ model.getValueAt(i, 1).toString() + " ";
                         }
                     }else{
                         amount += Double.parseDouble(model.getValueAt(i, 3).toString());
@@ -395,8 +394,6 @@ public class main extends javax.swing.JFrame {
                 }
                 execute = true;
             }else{
-                Double tableAmount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
-                amount = Double.parseDouble(quantityStr);
                 if((tableAmount-amount) != 0){
                     if((tableAmount-amount) > 0){
                         model.removeRow(rows-1);
@@ -410,46 +407,22 @@ public class main extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE // Type of message (ERROR_MESSAGE for error icon)
                         );
                     }
-                }else{
-                    amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
-                    for(int i=0; i < rows-1; i++){
-                        if(!model.getValueAt(i, 2).toString().equals("Paid")){
-                            int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
-                            for(int j=0; j < lastdigit;j++){
-                                items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""));
-                                if((j != lastdigit-1) || (i != rows-2)){
-                                    items += " ";
-                                } 
-                            }
-                        }else{
-                            amount += Double.parseDouble(model.getValueAt(i, 3).toString());
-                        }
-                    }
-                    for(int i=0; i < rows; i++){
-                        model.removeRow(0);
-                    }
-                    execute = true;
                 }
             }
-            
         }
         if(execute){
-        //removes the last space from the string
-            if(" ".equals(items.substring(items.length()-1))){
-                items = items.substring(0, items.length()-1);
-            }
             query = query.replace("replace Date", getCurrentDateTime());
             query = query.replace("replace Total Amount", amount.toString());
-            query = query.replace("Replace items", items);
+            query = query.replace("Replace items", items.trim());
             query = query.replace("type_of_payment", type_of_payment);
-            insert(query);
+            System.out.println(query);
+            //insert(query);
         }
         clearQuantity(); 
     }
     
-    public void updateTable(JTable r){
-        queryResult = updateData("SELECT `transaction_id`, `transaction_date`, `total_amount`, `items`, `Transaction_type` FROM `transactions`");
-        //DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
+    public void updateTable(JTable r, String preference){
+        queryResult = updateData("SELECT `transaction_id`, `transaction_date`, `total_amount`, `items`, `Transaction_type` FROM `transactions` ORDER BY preference DESC".replace("preference", preference));
         DefaultTableModel model = (DefaultTableModel) r.getModel();
         int i = model.getRowCount();
         while(i != 0){
@@ -459,9 +432,10 @@ public class main extends javax.swing.JFrame {
         try {
             while(queryResult.next()){
                 int id = queryResult.getInt(1);
-                String date = queryResult.getString(2);
+                String date = queryResult.getString(2).substring(0,10);
+                String time = queryResult.getString(2).substring(11);
                 double total = queryResult.getDouble(3);
-                model.addRow(new Object[]{id, date, total});
+                model.addRow(new Object[]{id, date,time, total});
             }
         } catch (SQLException ex) {
             Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
@@ -505,6 +479,8 @@ public class main extends javax.swing.JFrame {
         javax.swing.JButton clear = new javax.swing.JButton();
         quantityTextField = new javax.swing.JTextField();
         point = new javax.swing.JButton();
+        sizeDisplay = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -576,8 +552,6 @@ public class main extends javax.swing.JFrame {
                 dessertsActionPerformed(evt);
             }
         });
-
-        configPanel.setBackground(new java.awt.Color(153, 255, 255));
 
         corret.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         corret.setText("Error corret");
@@ -684,7 +658,7 @@ public class main extends javax.swing.JFrame {
         );
         contentPanelLayout.setVerticalGroup(
             contentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 627, Short.MAX_VALUE)
         );
 
         eight.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -785,6 +759,20 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        sizeDisplay.setEditable(false);
+        sizeDisplay.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        sizeDisplay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        sizeDisplay.setAutoscrolls(false);
+        sizeDisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sizeDisplayActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Size:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -815,7 +803,12 @@ public class main extends javax.swing.JFrame {
                                     .addComponent(six, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(nine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(three, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(point, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(point, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(sizeDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -834,16 +827,25 @@ public class main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(desserts, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(food, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(drinks, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(sizeDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, 0)
+                                .addComponent(jLabel1)
+                                .addGap(2, 2, 2)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -941,7 +943,7 @@ public class main extends javax.swing.JFrame {
         int row = table.getSelectedRow();
         if(row >= 0){
             String total = model.getValueAt(row, 2).toString();
-            if(!total.equals("Total") && (model.getRowCount() > 2) ){
+            if(!total.equals("Paid") && !total.equals("Total") && (model.getRowCount() > 2) ){
                 model.removeRow(row);
                 sumItems(model);
             }else{
@@ -974,6 +976,10 @@ public class main extends javax.swing.JFrame {
         java.awt.CardLayout cl = (java.awt.CardLayout) contentPanel.getLayout();
         cl.show(contentPanel, "Receipts"); // Switch to Receipts Panel
     }//GEN-LAST:event_paidOrdersActionPerformed
+
+    private void sizeDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeDisplayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sizeDisplayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1020,6 +1026,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton drinks;
     private javax.swing.JButton enableItem;
     private javax.swing.JButton food;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton paidOrders;
     private javax.swing.JButton pay;
@@ -1027,6 +1034,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField quantityTextField;
     private javax.swing.JButton refund;
     private javax.swing.JButton refundBack;
+    private javax.swing.JTextField sizeDisplay;
     private javax.swing.JButton staffDrinks;
     public javax.swing.JTable table;
     private javax.swing.JButton updateTill;
