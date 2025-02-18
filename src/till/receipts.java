@@ -141,33 +141,7 @@ public class receipts extends javax.swing.JPanel {
     }//GEN-LAST:event_printReceiptActionPerformed
 
     private void viewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderActionPerformed
-        String receipt = "";
-        int row = ordersTable.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) ordersTable.getModel();
-        String transactionID = model.getValueAt(row, 1).toString();
-        var queryResult = parent.updateData("SELECT * FROM `transactions` WHERE `transaction_id` = insertID;".replace("insertID", transactionID));
-        try {
-            //queryResult.next();//only onece because ID is unique for every transaction
-            var date = queryResult.getString(2).substring(0,10);
-            var time = queryResult.getString(2).substring(11);
-            var total = queryResult.getString(3);
-            var items = queryResult.getString(4).split(" ");
-            var transactionType = queryResult.getString(5);
-            HashMap<Integer, String> invertedIds = new HashMap<>();
-            for (String i : parent.ids.keySet()) {
-                invertedIds.put(parent.ids.get(i), i);
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        JOptionPane.showMessageDialog(
-            null, // Parent component (null for center of screen)
-            receipt, // Message to display
-            "Receipt", // Title of the dialog window
-            JOptionPane.PLAIN_MESSAGE // Type of message
-        );
+        parent.viewOrder(ordersTable);
     }//GEN-LAST:event_viewOrderActionPerformed
 
 

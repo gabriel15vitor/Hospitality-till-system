@@ -31,12 +31,7 @@ public class main extends javax.swing.JFrame {
     private String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
     String size = "";
-    private HashMap<String, HashMap<String, Double>> beerPrices = new HashMap<>();
-    private HashMap<String, HashMap<String, Double>> ciderPrices = new HashMap<>();
-    private HashMap<String, HashMap<String, Double>> winePrices = new HashMap<>();
-    private HashMap<String, HashMap<String, Double>> spiritPrices = new HashMap<>();
-    private HashMap<String, Double> softPrices = new HashMap<>();
-    private HashMap<String, Double> foodPrices = new HashMap<>();
+    public HashMap<String, HashMap<String, Double>> itemsPrices = new HashMap<>();
     public HashMap<String, Integer> ids = new HashMap<>();
     /**
      * Creates new form NewJFrame
@@ -110,7 +105,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("2/3", queryResult.getDouble(3));
                     prices.put("Half", queryResult.getDouble(4));
                     prices.put("1/3", queryResult.getDouble(5));
-                    beerPrices.put(name, prices);
+                    itemsPrices.put(name, prices);
                     ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
@@ -132,7 +127,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("2/3", queryResult.getDouble(3));
                     prices.put("Half", queryResult.getDouble(4));
                     prices.put("1/3", queryResult.getDouble(5));
-                    ciderPrices.put(name, prices);
+                    itemsPrices.put(name, prices);
                     ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
@@ -154,7 +149,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("250ml", queryResult.getDouble(3));
                     prices.put("175ml", queryResult.getDouble(4));
                     prices.put("125ml", queryResult.getDouble(5));
-                    winePrices.put(name, prices);
+                    itemsPrices.put(name, prices);
                     ids.put(name, queryResult.getInt(6));
                 }
             } catch (SQLException ex) {
@@ -175,7 +170,7 @@ public class main extends javax.swing.JFrame {
                     prices.put("50ml", queryResult.getDouble(2));
                     prices.put("25ml", queryResult.getDouble(3));
                     prices.put("", queryResult.getDouble(3));
-                    spiritPrices.put(name, prices);
+                    itemsPrices.put(name, prices);
                     ids.put(name, queryResult.getInt(4));
                 }
             } catch (SQLException ex) {
@@ -190,7 +185,9 @@ public class main extends javax.swing.JFrame {
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    softPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("Bottle", queryResult.getDouble(2));
+                    itemsPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), prices);
                     ids.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getInt(3));
                 }
             } catch (SQLException ex) {
@@ -205,7 +202,9 @@ public class main extends javax.swing.JFrame {
         if(queryResult != null){
             try {
                 while(queryResult.next()){
-                    foodPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getDouble(2));
+                    HashMap<String, Double> prices = new HashMap<>();
+                    prices.put("", queryResult.getDouble(2));
+                    itemsPrices.put(queryResult.getString(1).toLowerCase().replace(" ", ""), prices);
                     ids.put(queryResult.getString(1).toLowerCase().replace(" ", ""), queryResult.getInt(3));
                 }
             } catch (SQLException ex) {
@@ -243,7 +242,7 @@ public class main extends javax.swing.JFrame {
     public void addFood(String name1){
         String name = name1.toLowerCase().replace(" ", "");
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        Double price = foodPrices.get(name);
+        Double price = itemsPrices.get(name).get("");
         
         if(price != null){
             String removeDouble = "";// Get the quantity from the main class
@@ -280,7 +279,7 @@ public class main extends javax.swing.JFrame {
             
             case "beer" -> {
                 if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = beerPrices.get(name).get(size);
+                    r = itemsPrices.get(name).get(size);
                 }else{
                     r = null;
                 }
@@ -288,7 +287,7 @@ public class main extends javax.swing.JFrame {
             
             case "cider" -> {
                 if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = ciderPrices.get(name).get(size);
+                    r = itemsPrices.get(name).get(size);
                 }else{
                     r = null;
                 }
@@ -296,7 +295,7 @@ public class main extends javax.swing.JFrame {
                 
             case "wine" -> {
                 if(size.equals("") || size.equals("250ml") || size.equals("175ml") || size.equals("125ml")){
-                    r = winePrices.get(name).get(size);
+                    r = itemsPrices.get(name).get(size);
                 }else{
                     r = null;
                 }
@@ -304,15 +303,16 @@ public class main extends javax.swing.JFrame {
                 
             case "spirit" -> {
                 if(size.equals("") || size.equals("50ml") || size.equals("25ml")){
-                    r = spiritPrices.get(name).get(size);
+                    r = itemsPrices.get(name).get(size);
                 }else{
                     r = null;
                 }
             }
                 
             case "soft" -> {
-                r = softPrices.get(name);  
                 size = "Bottle";
+                r = itemsPrices.get(name).get(size);  
+                
             }
         }
         Double price = r;
@@ -416,7 +416,7 @@ public class main extends javax.swing.JFrame {
             query = query.replace("Replace items", items.trim());
             query = query.replace("type_of_payment", type_of_payment);
             System.out.println(query);
-            //insert(query);
+            insert(query);
         }
         clearQuantity(); 
     }
@@ -436,6 +436,57 @@ public class main extends javax.swing.JFrame {
                 String time = queryResult.getString(2).substring(11);
                 double total = queryResult.getDouble(3);
                 model.addRow(new Object[]{id, date,time, total});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void viewOrder(JTable ordersTable){
+        try {
+            String receipt;
+            String searchSize;
+            int row = ordersTable.getSelectedRow();
+            var model = (DefaultTableModel) ordersTable.getModel();
+            var transactionID = model.getValueAt(row, 0).toString();
+            var query = "SELECT * FROM `transactions` WHERE `transaction_id` = insertID;".replace("insertID", transactionID);
+            queryResult = updateData(query);
+            while(queryResult.next()){
+                var date = queryResult.getString(2).substring(0,10);
+                var time = queryResult.getString(2).substring(11);
+                var total = queryResult.getString(3);
+                var items = queryResult.getString(4).split(" ");
+                var transactionType = queryResult.getString(5);
+                HashMap<Integer, String> invertedIds = new HashMap<>();
+                for (String i : ids.keySet()) {
+                    invertedIds.put(ids.get(i), i);
+                }
+
+                receipt = "ID:  " + transactionID + "\n\n" + "Date:  " + date + "\n\n" + "Time:  " + time + "\n\n" + "Payment Method:  " + transactionType + "\n\n";
+
+                for(String i : items){
+                    var properties = i.split("<->");
+                    if(properties.length > 1){
+                        searchSize = properties[1];
+                        switch(properties[1]){
+                            case "Pint" -> searchSize = "";
+                            case "Bottle" -> searchSize = "";
+                            case "" -> searchSize = "";
+                        }
+                    }else{
+                        searchSize = "";
+                    }
+                    var price = itemsPrices.get(invertedIds.get(Integer.parseInt(properties[0]))).get(searchSize);
+                    var itemName = invertedIds.get(Integer.parseInt(properties[0]));
+                    receipt += searchSize + " " + itemName + "__________" + price + "\n";
+                }
+                System.out.println(receipt);
+                JOptionPane.showMessageDialog(
+                        null, // Parent component (null for center of screen)
+                        receipt, // Message to display
+                        "Receipt", // Title of the dialog window
+                        JOptionPane.PLAIN_MESSAGE // Type of message
+                );
             }
         } catch (SQLException ex) {
             Logger.getLogger(receipts.class.getName()).log(Level.SEVERE, null, ex);
