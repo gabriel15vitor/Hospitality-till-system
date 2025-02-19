@@ -4,6 +4,7 @@
  */
 package till;
 
+import javax.swing.JButton;
 import javax.swing.JTable;
 import till.main;
 /**
@@ -29,29 +30,29 @@ public class desserts extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cake = new javax.swing.JButton();
-        tart = new javax.swing.JButton();
-        cheesecake = new javax.swing.JButton();
+        b46 = new javax.swing.JButton();
+        b47 = new javax.swing.JButton();
+        b48 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        cake.setText("Molten Chocolate Lava Cake");
-        cake.addActionListener(new java.awt.event.ActionListener() {
+        b46.setText("Molten Chocolate Lava Cake");
+        b46.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cakeActionPerformed(evt);
+                b46ActionPerformed(evt);
             }
         });
 
-        tart.setText("Caramelized Pear & Almond Tart");
-        tart.addActionListener(new java.awt.event.ActionListener() {
+        b47.setText("Caramelized Pear & Almond Tart");
+        b47.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tartActionPerformed(evt);
+                b47ActionPerformed(evt);
             }
         });
 
-        cheesecake.setText("Toasted Marshmallow Cheesecake");
-        cheesecake.addActionListener(new java.awt.event.ActionListener() {
+        b48.setText("Toasted Marshmallow Cheesecake");
+        b48.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cheesecakeActionPerformed(evt);
+                b48ActionPerformed(evt);
             }
         });
 
@@ -64,9 +65,9 @@ public class desserts extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cake, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cheesecake, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(b46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(b47, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(b48, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 178, Short.MAX_VALUE))
         );
@@ -75,32 +76,38 @@ public class desserts extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cake, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(b46, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(tart, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(b47, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(cheesecake, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(b48, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 138, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cakeActionPerformed
-        parent.addFood("Molten Chocolate Lava Cake");
-    }//GEN-LAST:event_cakeActionPerformed
+    private void b46ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b46ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b46ActionPerformed
 
-    private void tartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tartActionPerformed
-        parent.addFood("Caramelized Pear & Almond Tart");
-    }//GEN-LAST:event_tartActionPerformed
+    private void b47ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b47ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b47ActionPerformed
 
-    private void cheesecakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cheesecakeActionPerformed
-        parent.addFood("Toasted Marshmallow Cheesecake");
-    }//GEN-LAST:event_cheesecakeActionPerformed
+    private void b48ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b48ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b48ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cake;
-    private javax.swing.JButton cheesecake;
+    private javax.swing.JButton b46;
+    private javax.swing.JButton b47;
+    private javax.swing.JButton b48;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton tart;
     // End of variables declaration//GEN-END:variables
 }

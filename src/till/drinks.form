@@ -101,28 +101,28 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jTextField1" alignment="0" pref="130" max="32767" attributes="0"/>
-                                          <Component id="mesmerist" alignment="0" pref="130" max="32767" attributes="0"/>
-                                          <Component id="lumina" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="soundwave" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b3" alignment="0" pref="130" max="32767" attributes="0"/>
+                                          <Component id="b1" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b2" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="santo" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="stationhill" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="pastel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b6" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b5" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b4" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jTextField2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jTextField3" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                          <Component id="brokendream" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                          <Component id="shattereddream" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="b7" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="b8" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jTextField4" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                          <Component id="pomp" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                                          <Component id="secondserve" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="b9" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
+                                          <Component id="b10" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -143,35 +143,35 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField4" min="-2" pref="28" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="pomp" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="b9" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="secondserve" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="b10" min="-2" pref="38" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField3" min="-2" pref="28" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="brokendream" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="b7" min="-2" pref="38" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jTextField2" min="-2" pref="28" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="pastel" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="b4" min="-2" pref="38" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="stationhill" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                          <Component id="shattereddream" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                          <Component id="soundwave" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="b5" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="b8" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="b2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="santo" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                          <Component id="mesmerist" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="b6" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                          <Component id="b3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextField1" min="-2" pref="28" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="lumina" min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="b1" min="-2" pref="38" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -204,108 +204,120 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onethirdActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="lumina">
+                    <Component class="javax.swing.JButton" name="b1">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Lumina"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="luminaActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b1ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="mesmerist">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Mesmerist"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesmeristActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="pastel">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Pastel"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pastelActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="shattereddream">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Shattered Dream"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="shattereddreamActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="santo">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Santo"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="santoActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="secondserve">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Second Serve"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="secondserveActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="soundwave">
+                    <Component class="javax.swing.JButton" name="b2">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Soundwave"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="soundwaveActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b2ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="pomp">
+                    <Component class="javax.swing.JButton" name="b3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Grapefruit"/>
+                        <Property name="text" type="java.lang.String" value="Mesmerist"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pompActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b3ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="stationhill">
+                    <Component class="javax.swing.JButton" name="b4">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Pastel"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b4ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b5">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Station Hill"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stationhillActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b5ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b6">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Santo"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b6ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b7">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Broken Dream"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b7ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b8">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Shattered Dream"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b8ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b9">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Grapefruit"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b9ActionPerformed"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="b10">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Second Serve"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b10ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -340,18 +352,6 @@
                         <Property name="text" type="java.lang.String" value="Sour"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JButton" name="brokendream">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Broken Dream"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brokendreamActionPerformed"/>
-                      </Events>
-                      <AuxValues>
-                        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
-                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
-                      </AuxValues>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="GuestBeers">
@@ -369,9 +369,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="guest1" max="32767" attributes="0"/>
+                                  <Component id="b11" max="32767" attributes="0"/>
                                   <Component id="twothirds1" pref="130" max="32767" attributes="0"/>
-                                  <Component id="guest2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="b12" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="67" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -383,8 +383,8 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="guest4" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="guest3" alignment="0" pref="130" max="32767" attributes="0"/>
+                                          <Component id="b14" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="b13" alignment="0" pref="130" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
@@ -403,13 +403,13 @@
                               </Group>
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="guest1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="guest3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="b11" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="b13" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="guest4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                                  <Component id="guest2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="b14" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="b12" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace pref="95" max="32767" attributes="0"/>
                           </Group>
@@ -441,48 +441,48 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onethird1ActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JButton" name="guest1">
+                    <Component class="javax.swing.JButton" name="b11">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest1"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b11ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="guest3">
+                    <Component class="javax.swing.JButton" name="b13">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest3"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest3ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b13ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="guest2">
+                    <Component class="javax.swing.JButton" name="b12">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest2"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest2ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b12ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JButton" name="guest4">
+                    <Component class="javax.swing.JButton" name="b14">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Guest4"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guest4ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b14ActionPerformed"/>
                       </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -557,9 +557,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace pref="182" max="32767" attributes="0"/>
-                          <Component id="applecider" min="-2" pref="145" max="-2" attributes="0"/>
+                          <Component id="b15" min="-2" pref="145" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
-                          <Component id="cherrycider" min="-2" pref="163" max="-2" attributes="0"/>
+                          <Component id="b16" min="-2" pref="163" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -574,8 +574,8 @@
                           </Group>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="applecider" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="cherrycider" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="b15" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                              <Component id="b16" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="112" max="32767" attributes="0"/>
                       </Group>
@@ -607,24 +607,24 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="onethird2ActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="applecider">
+                <Component class="javax.swing.JButton" name="b15">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Apple cider"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="appleciderActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b15ActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JButton" name="cherrycider">
+                <Component class="javax.swing.JButton" name="b16">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Cherry cider"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cherryciderActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b16ActionPerformed"/>
                   </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -650,11 +650,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="merlot" max="32767" attributes="0"/>
+                          <Component id="b18" max="32767" attributes="0"/>
                           <Component id="largewine" pref="149" max="32767" attributes="0"/>
                           <Component id="jTextField6" max="32767" attributes="0"/>
-                          <Component id="pinotNoir" alignment="1" pref="149" max="32767" attributes="0"/>
-                          <Component id="malbec" alignment="0" pref="149" max="32767" attributes="0"/>
+                          <Component id="b19" alignment="1" pref="149" max="32767" attributes="0"/>
+                          <Component id="b17" alignment="0" pref="149" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -665,15 +665,15 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="viognier" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="pinotGrigio" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="sauvignonBlanc" alignment="0" pref="149" max="32767" attributes="0"/>
+                                  <Component id="b22" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="b21" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="b20" alignment="0" pref="149" max="32767" attributes="0"/>
                                   <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField7" max="32767" attributes="0"/>
-                                  <Component id="frenchRose" pref="140" max="32767" attributes="0"/>
+                                  <Component id="b23" pref="140" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -699,24 +699,24 @@
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="malbec" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="b17" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Component id="merlot" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="b18" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="sauvignonBlanc" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                                  <Component id="frenchRose" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="b20" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
+                                  <Component id="b23" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="pinotGrigio" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="b21" min="-2" pref="39" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pinotNoir" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="viognier" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="b19" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="b22" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -724,6 +724,27 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
+            <Component class="javax.swing.JTextField" name="jTextField5">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="White"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField6">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Red"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField7">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Rose"/>
+              </Properties>
+            </Component>
             <Component class="javax.swing.JButton" name="mediumwine">
               <Properties>
                 <Property name="text" type="java.lang.String" value="175ml"/>
@@ -748,105 +769,84 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="largewineActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField5">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="White"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField6">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Red"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField7">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Rose"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="merlot">
+            <Component class="javax.swing.JButton" name="b18">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Merlot"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="merlotActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b18ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="pinotNoir">
+            <Component class="javax.swing.JButton" name="b19">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pinot noir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinotNoirActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b19ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="malbec">
+            <Component class="javax.swing.JButton" name="b17">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Malbec"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="malbecActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b17ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="sauvignonBlanc">
+            <Component class="javax.swing.JButton" name="b20">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sauvignon Blanc"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sauvignonBlancActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b20ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="viognier">
+            <Component class="javax.swing.JButton" name="b22">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Viognier"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viognierActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b22ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="pinotGrigio">
+            <Component class="javax.swing.JButton" name="b21">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Pinot Grigio"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinotGrigioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b21ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="frenchRose">
+            <Component class="javax.swing.JButton" name="b23">
               <Properties>
                 <Property name="text" type="java.lang.String" value="French Rose"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="frenchRoseActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b23ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -873,25 +873,25 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField9" max="32767" attributes="0"/>
-                                  <Component id="whiteGin" alignment="0" pref="110" max="32767" attributes="0"/>
-                                  <Component id="pinkGin" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="b24" alignment="0" pref="110" max="32767" attributes="0"/>
+                                  <Component id="b28" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField11" max="32767" attributes="0"/>
-                                  <Component id="whiteRum" max="32767" attributes="0"/>
-                                  <Component id="spicedRum" pref="110" max="32767" attributes="0"/>
+                                  <Component id="b25" max="32767" attributes="0"/>
+                                  <Component id="b30" pref="110" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField8" max="32767" attributes="0"/>
-                                  <Component id="foreignWhisky" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="bourbon" alignment="0" pref="110" max="32767" attributes="0"/>
+                                  <Component id="b29" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="b26" alignment="0" pref="110" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jTextField10" max="32767" attributes="0"/>
-                                  <Component id="absolut" pref="110" max="32767" attributes="0"/>
+                                  <Component id="b27" pref="110" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -922,17 +922,17 @@
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="whiteGin" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="whiteRum" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="bourbon" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          <Component id="absolut" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="b24" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="b25" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="b26" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="b27" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pinkGin" min="-2" pref="34" max="-2" attributes="0"/>
+                          <Component id="b28" min="-2" pref="34" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                              <Component id="spicedRum" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                              <Component id="foreignWhisky" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="b30" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                              <Component id="b29" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -941,20 +941,20 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="doubleShot">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="50ml"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doubleShotActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="singleShot">
               <Properties>
                 <Property name="text" type="java.lang.String" value="25ml"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="singleShotActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="doubleShot">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="50ml"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doubleShotActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField8">
@@ -988,84 +988,84 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField11ActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="whiteGin">
+            <Component class="javax.swing.JButton" name="b24">
               <Properties>
-                <Property name="text" type="java.lang.String" value="White"/>
+                <Property name="text" type="java.lang.String" value="White gin"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="whiteGinActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b24ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="whiteRum">
+            <Component class="javax.swing.JButton" name="b25">
               <Properties>
                 <Property name="text" type="java.lang.String" value="White rum"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="whiteRumActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b25ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="bourbon">
+            <Component class="javax.swing.JButton" name="b26">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bourbon"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bourbonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b26ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="absolut">
+            <Component class="javax.swing.JButton" name="b27">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Absolut"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="absolutActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b27ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="pinkGin">
+            <Component class="javax.swing.JButton" name="b28">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pink"/>
+                <Property name="text" type="java.lang.String" value="Pink gin"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pinkGinActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b28ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="foreignWhisky">
+            <Component class="javax.swing.JButton" name="b29">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Foreign whisky"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="foreignWhiskyActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b29ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="spicedRum">
+            <Component class="javax.swing.JButton" name="b30">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Spiced rum"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="spicedRumActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b30ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
@@ -1089,9 +1089,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="coke" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dietCoke" alignment="0" max="32767" attributes="0"/>
-                          <Component id="orangeJuice" alignment="0" pref="126" max="32767" attributes="0"/>
+                          <Component id="b31" alignment="0" max="32767" attributes="0"/>
+                          <Component id="b32" alignment="0" max="32767" attributes="0"/>
+                          <Component id="b33" alignment="0" pref="126" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="504" max="32767" attributes="0"/>
                   </Group>
@@ -1101,47 +1101,47 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="coke" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="b31" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="dietCoke" min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="b32" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="orangeJuice" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="b33" min="-2" pref="38" max="-2" attributes="0"/>
                       <EmptySpace pref="116" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="coke">
+            <Component class="javax.swing.JButton" name="b31">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Coke"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cokeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b31ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="dietCoke">
+            <Component class="javax.swing.JButton" name="b32">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Diet coke"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dietCokeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b32ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="orangeJuice">
+            <Component class="javax.swing.JButton" name="b33">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Orange Juice"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orangeJuiceActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="b33ActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>

@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/till/receipts.java</file>
-            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/drinks/drinks.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/till/desserts.java</file>
             <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/till/main.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/till/drinks.java</file>
+            <file>file:/C:/Users/gabri/Documents/NetBeansProjects/Hospitality-till-system/src/till/food.java</file>
         </group>
     </open-files>
 </project-private>

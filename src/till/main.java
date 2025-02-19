@@ -4,6 +4,7 @@
  */
 package till;
 
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
@@ -16,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -34,6 +36,7 @@ public class main extends javax.swing.JFrame {
     String size = "";
     public HashMap<String, HashMap<String, Double>> itemsPrices = new HashMap<>();
     public HashMap<String, Integer> ids = new HashMap<>();
+    public Boolean block = null;
     /**
      * Creates new form NewJFrame
      */
@@ -275,85 +278,88 @@ public class main extends javax.swing.JFrame {
     }
     
     public void addDrink(String name1, String type){
-        Double r = null;
-        String name = name1.toLowerCase().replace(" ", "");
-        switch(type){
-            
-            case "beer" -> {
-                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = itemsPrices.get(name).get(size);
+        if(name1 != null){
+            Double r = null;
+            String name = name1.toLowerCase().replace(" ", "");
+            switch(type){
+
+                case "beer" -> {
+                    if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
+                        r = itemsPrices.get(name).get(size);
+                    }else{
+                        r = null;
+                    }
+                }
+
+                case "cider" -> {
+                    if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
+                        r = itemsPrices.get(name).get(size);
+                    }else{
+                        r = null;
+                    }
+                }
+
+                case "wine" -> {
+                    if(size.equals("") || size.equals("250ml") || size.equals("175ml") || size.equals("125ml")){
+                        r = itemsPrices.get(name).get(size);
+                    }else{
+                        r = null;
+                    }
+                }
+
+                case "spirit" -> {
+                    if(size.equals("") || size.equals("50ml") || size.equals("25ml")){
+                        r = itemsPrices.get(name).get(size);
+                    }else{
+                        r = null;
+                    }
+                }
+
+                case "soft" -> {
+                    //size = "Bottle";
+                    r = itemsPrices.get(name).get(size);  
+
+                }
+            }
+            Double price = r;
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+            if(price != null){
+                String removeDouble = "";// Get the quantity from the main class
+                int index = quantityStr.indexOf(".");
+                int quantity, i=0;
+
+                //This if removes the decimal part of the string so it wont affect the size or price
+                if(index == -1){
+                    quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
                 }else{
-                    r = null;
+                    while(i != index){
+                        removeDouble += quantityStr.charAt(i);
+                        i++;
+                    }
+                    quantity = Integer.parseInt(removeDouble);
                 }
-            }
-            
-            case "cider" -> {
-                if(size.equals("") || size.equals("2/3") || size.equals("Half") || size.equals("1/3")){
-                    r = itemsPrices.get(name).get(size);
-                }else{
-                    r = null;
+
+                if(size.isEmpty()){
+                    switch(type){
+                        case "beer" -> size = "Pint";
+                        case "cider" -> size = "Pint";
+                        case "wine" -> size = "Bottle";
+                        case "spirit" -> size = "25ml";
+                        case "soft" -> size = "Bottle";
+                    }
                 }
-            }
-                
-            case "wine" -> {
-                if(size.equals("") || size.equals("250ml") || size.equals("175ml") || size.equals("125ml")){
-                    r = itemsPrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-                
-            case "spirit" -> {
-                if(size.equals("") || size.equals("50ml") || size.equals("25ml")){
-                    r = itemsPrices.get(name).get(size);
-                }else{
-                    r = null;
-                }
-            }
-                
-            case "soft" -> {
-                size = "Bottle";
-                r = itemsPrices.get(name).get(size);  
-                
-            }
-        }
-        Double price = r;
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
-        if(price != null){
-            String removeDouble = "";// Get the quantity from the main class
-            int index = quantityStr.indexOf(".");
-            int quantity, i=0;
-            
-            //This if removes the decimal part of the string so it wont affect the size or price
-            if(index == -1){
-                quantity = quantityStr.isEmpty() ? 1 : Integer.parseInt(quantityStr);
-            }else{
-                while(i != index){
-                    removeDouble += quantityStr.charAt(i);
-                    i++;
-                }
-                quantity = Integer.parseInt(removeDouble);
-            }
-            
-            if(size.isEmpty()){
-                switch(type){
-                    case "beer" -> size = "Pint";
-                    case "cider" -> size = "Pint";
-                    case "wine" -> size = "Bottle";
-                    case "spirit" -> size = "25ml";
-                }
+
+                // Add the row to the table
+                model.addRow(new Object[]{quantity, size, name1, price*quantity});
             }
 
-            // Add the row to the table
-            model.addRow(new Object[]{quantity, size, name1, price*quantity});
+            // Clear the quantity in the main class
+            clearQuantity();
+            size="";
+            sumItems(model);
+            setDrinksSize(size);
         }
-
-        // Clear the quantity in the main class
-        clearQuantity();
-        size="";
-        sumItems(model);
-        setDrinksSize(size);
     }
     
     public String getCurrentDateTime() {
@@ -499,7 +505,7 @@ public class main extends javax.swing.JFrame {
         int row = ordersTable.getSelectedRow();
         var model = (DefaultTableModel) ordersTable.getModel();
         var transactionID = model.getValueAt(row, 0).toString();
-        transactionID = "./receipt/"+ transactionID + ".txt";
+        transactionID = "./"+ transactionID + ".txt";
         Path path = Path.of(transactionID);
             System.out.println(path);
         var writer = Files.newBufferedWriter(path);
@@ -522,6 +528,44 @@ public class main extends javax.swing.JFrame {
             Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public Boolean isAvailable(JButton button){
+        Boolean r = true;
+        if(button.getText().contains(" *")){
+            if(block == null || block){
+                JOptionPane.showMessageDialog(
+                null, // Parent component (null for center of screen)
+                "Item out of stock", // Message to display
+                "Item out of stock", // Title of the dialog window
+                JOptionPane.PLAIN_MESSAGE // Type of message
+                );
+            }else{
+                var normalName = button.getText().replace(" *", "");
+                button.setText(normalName);
+            }
+            r = false;
+        }else{
+            if(block == null){
+                block = false;
+            }
+            if(block){
+                button.setText(button.getText() + " *");
+                r = false;
+            }
+        }
+        block = null;
+        return r;
+    }
+    
+    public String buttonName(ActionEvent evt){
+        return ((JButton) evt.getSource()).getText();
+    }
+    
+    public JButton getButton(ActionEvent evt){
+        
+        return ((JButton) evt.getSource());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -676,8 +720,18 @@ public class main extends javax.swing.JFrame {
         staffDrinks.setText("Staff Food/Drink");
 
         blockItem.setText("Block Item");
+        blockItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blockItemActionPerformed(evt);
+            }
+        });
 
         enableItem.setText("Enable Item");
+        enableItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enableItemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout configPanelLayout = new javax.swing.GroupLayout(configPanel);
         configPanel.setLayout(configPanelLayout);
@@ -719,7 +773,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(refundBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(staffDrinks, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(blockItem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(enableItem, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -727,7 +781,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(pay, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(updateTill, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addContainerGap())
         );
 
         eight.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -863,21 +917,21 @@ public class main extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(55, 55, 55)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 62, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sizeDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                .addGap(99, 99, 99))
+                                .addComponent(sizeDisplay, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                .addGap(102, 102, 102))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addGap(6, 6, 6)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(drinks, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(drinks, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(food, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                .addComponent(food, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(desserts, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
+                                .addComponent(desserts, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
                             .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -1058,6 +1112,15 @@ public class main extends javax.swing.JFrame {
     private void sizeDisplayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sizeDisplayActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sizeDisplayActionPerformed
+
+    private void blockItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockItemActionPerformed
+        block = true;
+        System.out.println(block);
+    }//GEN-LAST:event_blockItemActionPerformed
+
+    private void enableItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableItemActionPerformed
+        block = false;
+    }//GEN-LAST:event_enableItemActionPerformed
 
     /**
      * @param args the command line arguments

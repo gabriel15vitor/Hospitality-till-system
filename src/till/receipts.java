@@ -4,8 +4,6 @@
  */
 package till;
 
-import java.io.File;
-import java.io.IOException;
 import javax.swing.JOptionPane;
 
 /**
@@ -135,7 +133,6 @@ public class receipts extends javax.swing.JPanel {
     private void printReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReceiptActionPerformed
         String text = parent.viewOrder(ordersTable);
         parent.printReceipt(ordersTable, text);
-        
     }//GEN-LAST:event_printReceiptActionPerformed
 
     private void viewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderActionPerformed

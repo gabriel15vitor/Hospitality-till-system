@@ -4,6 +4,7 @@
  */
 package till;
 
+import javax.swing.JButton;
 import till.main;
 
 /**
@@ -30,47 +31,47 @@ public class food extends javax.swing.JPanel {
 
         food = new javax.swing.JTabbedPane();
         starters = new javax.swing.JPanel();
-        ribs = new javax.swing.JButton();
-        halloumi = new javax.swing.JButton();
-        soup = new javax.swing.JButton();
-        calamari = new javax.swing.JButton();
+        b34 = new javax.swing.JButton();
+        b35 = new javax.swing.JButton();
+        b36 = new javax.swing.JButton();
+        b37 = new javax.swing.JButton();
         mainPlates = new javax.swing.JPanel();
-        rybeye = new javax.swing.JButton();
-        risotto = new javax.swing.JButton();
-        salmon = new javax.swing.JButton();
-        burger = new javax.swing.JButton();
-        greens = new javax.swing.JButton();
-        carrots = new javax.swing.JButton();
-        fries = new javax.swing.JButton();
-        potatoes = new javax.swing.JButton();
+        b38 = new javax.swing.JButton();
+        b39 = new javax.swing.JButton();
+        b40 = new javax.swing.JButton();
+        b41 = new javax.swing.JButton();
+        b42 = new javax.swing.JButton();
+        b43 = new javax.swing.JButton();
+        b44 = new javax.swing.JButton();
+        b45 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        ribs.setText("Smoky Charred Corn Ribs");
-        ribs.addActionListener(new java.awt.event.ActionListener() {
+        b34.setText("Smoky Charred Corn Ribs");
+        b34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ribsActionPerformed(evt);
+                b34ActionPerformed(evt);
             }
         });
 
-        halloumi.setText("Fire-Grilled Halloumi");
-        halloumi.addActionListener(new java.awt.event.ActionListener() {
+        b35.setText("Fire-Grilled Halloumi");
+        b35.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                halloumiActionPerformed(evt);
+                b35ActionPerformed(evt);
             }
         });
 
-        soup.setText("Ember-Roasted Tomato Soup");
-        soup.addActionListener(new java.awt.event.ActionListener() {
+        b36.setText("Ember-Roasted Tomato Soup");
+        b36.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                soupActionPerformed(evt);
+                b36ActionPerformed(evt);
             }
         });
 
-        calamari.setText("Crispy Spiced Calamari");
-        calamari.addActionListener(new java.awt.event.ActionListener() {
+        b37.setText("Crispy Spiced Calamari");
+        b37.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calamariActionPerformed(evt);
+                b37ActionPerformed(evt);
             }
         });
 
@@ -81,12 +82,12 @@ public class food extends javax.swing.JPanel {
             .addGroup(startersLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(startersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ribs, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(soup))
+                    .addComponent(b34, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b36))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(startersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(calamari, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(halloumi, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b37, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b35, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
         startersLayout.setVerticalGroup(
@@ -94,70 +95,70 @@ public class food extends javax.swing.JPanel {
             .addGroup(startersLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(startersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ribs, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(halloumi, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b34, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b35, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(startersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(soup, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(calamari, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b36, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b37, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(259, Short.MAX_VALUE))
         );
 
         food.addTab("Small plates", starters);
 
-        rybeye.setText("Flame-Seared Ribeye");
-        rybeye.addActionListener(new java.awt.event.ActionListener() {
+        b38.setText("Flame-Seared Ribeye");
+        b38.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rybeyeActionPerformed(evt);
+                b38ActionPerformed(evt);
             }
         });
 
-        risotto.setText("Wild Mushroom Risotto \t");
-        risotto.addActionListener(new java.awt.event.ActionListener() {
+        b39.setText("Wood-Fired Wild Mushroom Risotto");
+        b39.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                risottoActionPerformed(evt);
+                b39ActionPerformed(evt);
             }
         });
 
-        salmon.setText("Charcoal-Grilled Salmon");
-        salmon.addActionListener(new java.awt.event.ActionListener() {
+        b40.setText("Charcoal-Grilled Salmon");
+        b40.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salmonActionPerformed(evt);
+                b40ActionPerformed(evt);
             }
         });
 
-        burger.setText("Smoked BBQ Jackfruit Burger");
-        burger.addActionListener(new java.awt.event.ActionListener() {
+        b41.setText("Smoked BBQ Jackfruit Burger");
+        b41.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                burgerActionPerformed(evt);
+                b41ActionPerformed(evt);
             }
         });
 
-        greens.setText("Chili Butter Greens");
-        greens.addActionListener(new java.awt.event.ActionListener() {
+        b42.setText("Chili Butter Greens");
+        b42.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                greensActionPerformed(evt);
+                b42ActionPerformed(evt);
             }
         });
 
-        carrots.setText("Maple-Glazed Carrots");
-        carrots.addActionListener(new java.awt.event.ActionListener() {
+        b43.setText("Maple-Glazed Carrots");
+        b43.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carrotsActionPerformed(evt);
+                b43ActionPerformed(evt);
             }
         });
 
-        fries.setText("Truffle Parmesan Fries");
-        fries.addActionListener(new java.awt.event.ActionListener() {
+        b44.setText("Truffle Parmesan Fries");
+        b44.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                friesActionPerformed(evt);
+                b44ActionPerformed(evt);
             }
         });
 
-        potatoes.setText("Garlic Roasted Potatoes");
-        potatoes.addActionListener(new java.awt.event.ActionListener() {
+        b45.setText("Garlic Roasted Potatoes");
+        b45.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                potatoesActionPerformed(evt);
+                b45ActionPerformed(evt);
             }
         });
 
@@ -179,27 +180,32 @@ public class food extends javax.swing.JPanel {
                 .addGap(80, 80, 80)
                 .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPlatesLayout.createSequentialGroup()
-                        .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(mainPlatesLayout.createSequentialGroup()
-                                .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(rybeye, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(risotto, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(60, 60, 60)
-                                .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(burger, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(salmon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(mainPlatesLayout.createSequentialGroup()
                         .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(carrots, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fries, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(b43, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b44, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(potatoes, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(greens, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(b45, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(b42, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(mainPlatesLayout.createSequentialGroup()
+                .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPlatesLayout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(b38, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainPlatesLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(b39, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(50, 50, 50)
+                .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(b40, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b41))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         mainPlatesLayout.setVerticalGroup(
             mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,22 +214,22 @@ public class food extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rybeye, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(salmon, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b38, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b40, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(risotto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(burger, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b39, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b41, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(carrots, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(greens, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b43, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b42, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPlatesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fries, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(potatoes, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(b44, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(b45, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -241,72 +247,96 @@ public class food extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ribsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ribsActionPerformed
-        parent.addFood("Smoky Charred Corn Ribs");
-    }//GEN-LAST:event_ribsActionPerformed
+    private void b34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b34ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b34ActionPerformed
 
-    private void halloumiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_halloumiActionPerformed
-        parent.addFood("Fire-Grilled Halloumi");
-    }//GEN-LAST:event_halloumiActionPerformed
+    private void b35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b35ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b35ActionPerformed
 
-    private void soupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soupActionPerformed
-        parent.addFood("Ember-Roasted Tomato Soup");
-    }//GEN-LAST:event_soupActionPerformed
+    private void b36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b36ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b36ActionPerformed
 
-    private void calamariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calamariActionPerformed
-        parent.addFood("Crispy Spiced Calamari");
-    }//GEN-LAST:event_calamariActionPerformed
+    private void b37ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b37ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b37ActionPerformed
 
-    private void rybeyeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rybeyeActionPerformed
-        parent.addFood("Flame-Seared Ribeye");
-    }//GEN-LAST:event_rybeyeActionPerformed
+    private void b38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b38ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b38ActionPerformed
 
-    private void salmonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salmonActionPerformed
-        parent.addFood("Charcoal-Grilled Salmon");
-    }//GEN-LAST:event_salmonActionPerformed
+    private void b40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b40ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b40ActionPerformed
 
-    private void risottoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_risottoActionPerformed
-        parent.addFood("Wood-Fired Wild Mushroom Risotto");
-    }//GEN-LAST:event_risottoActionPerformed
+    private void b39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b39ActionPerformed
+       if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b39ActionPerformed
 
-    private void burgerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_burgerActionPerformed
-        parent.addFood("Smoked BBQ Jackfruit Burger");
-    }//GEN-LAST:event_burgerActionPerformed
+    private void b41ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b41ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b41ActionPerformed
 
-    private void carrotsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrotsActionPerformed
-        parent.addFood("Maple-Glazed Carrots");
-    }//GEN-LAST:event_carrotsActionPerformed
+    private void b43ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b43ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b43ActionPerformed
 
-    private void greensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_greensActionPerformed
-        parent.addFood("Chili Butter Greens");
-    }//GEN-LAST:event_greensActionPerformed
+    private void b42ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b42ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b42ActionPerformed
 
-    private void friesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friesActionPerformed
-        parent.addFood("Truffle Parmesan Fries");
-    }//GEN-LAST:event_friesActionPerformed
+    private void b44ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b44ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b44ActionPerformed
 
-    private void potatoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_potatoesActionPerformed
-        parent.addFood("Garlic Roasted Potatoes");
-    }//GEN-LAST:event_potatoesActionPerformed
+    private void b45ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b45ActionPerformed
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addFood(((JButton) evt.getSource()).getText());
+        }
+    }//GEN-LAST:event_b45ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton burger;
-    private javax.swing.JButton calamari;
-    private javax.swing.JButton carrots;
+    private javax.swing.JButton b34;
+    private javax.swing.JButton b35;
+    private javax.swing.JButton b36;
+    private javax.swing.JButton b37;
+    private javax.swing.JButton b38;
+    private javax.swing.JButton b39;
+    private javax.swing.JButton b40;
+    private javax.swing.JButton b41;
+    private javax.swing.JButton b42;
+    private javax.swing.JButton b43;
+    private javax.swing.JButton b44;
+    private javax.swing.JButton b45;
     private javax.swing.JTabbedPane food;
-    private javax.swing.JButton fries;
-    private javax.swing.JButton greens;
-    private javax.swing.JButton halloumi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel mainPlates;
-    private javax.swing.JButton potatoes;
-    private javax.swing.JButton ribs;
-    private javax.swing.JButton risotto;
-    private javax.swing.JButton rybeye;
-    private javax.swing.JButton salmon;
-    private javax.swing.JButton soup;
     private javax.swing.JPanel starters;
     // End of variables declaration//GEN-END:variables
 }
