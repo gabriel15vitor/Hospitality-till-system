@@ -33,7 +33,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="drinks" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="drinks" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -102,26 +105,26 @@
                                           <Component id="lumina" alignment="0" max="32767" attributes="0"/>
                                           <Component id="soundwave" alignment="0" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="101" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="santo" alignment="0" max="32767" attributes="0"/>
                                           <Component id="stationhill" alignment="0" max="32767" attributes="0"/>
                                           <Component id="pastel" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jTextField2" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="99" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jTextField3" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                           <Component id="brokendream" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                           <Component id="shattereddream" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="100" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jTextField4" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                           <Component id="pomp" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                           <Component id="secondserve" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -370,11 +373,11 @@
                                   <Component id="twothirds1" pref="130" max="32767" attributes="0"/>
                                   <Component id="guest2" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="170" max="32767" attributes="0"/>
+                              <EmptySpace pref="67" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="half1" min="-2" pref="130" max="-2" attributes="0"/>
-                                      <EmptySpace pref="171" max="32767" attributes="0"/>
+                                      <EmptySpace pref="67" max="32767" attributes="0"/>
                                       <Component id="onethird1" min="-2" pref="130" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                                   </Group>
@@ -408,7 +411,7 @@
                                   <Component id="guest4" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                   <Component id="guest2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="373" max="32767" attributes="0"/>
+                              <EmptySpace pref="95" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -533,7 +536,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="SirenBeers1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="339" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="61" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -553,11 +556,11 @@
                           <Component id="onethird2" min="-2" pref="130" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace pref="272" max="32767" attributes="0"/>
+                          <EmptySpace pref="182" max="32767" attributes="0"/>
                           <Component id="applecider" min="-2" pref="145" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                           <Component id="cherrycider" min="-2" pref="163" max="-2" attributes="0"/>
-                          <EmptySpace pref="159" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -674,7 +677,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="213" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -715,7 +718,7 @@
                           <Component id="pinotNoir" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="viognier" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="284" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -865,7 +868,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="48" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -898,7 +901,7 @@
                               <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="218" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1090,7 +1093,7 @@
                           <Component id="dietCoke" alignment="0" max="32767" attributes="0"/>
                           <Component id="orangeJuice" alignment="0" pref="126" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="711" max="32767" attributes="0"/>
+                      <EmptySpace pref="504" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1103,7 +1106,7 @@
                       <Component id="dietCoke" min="-2" pref="39" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="orangeJuice" min="-2" pref="38" max="-2" attributes="0"/>
-                      <EmptySpace pref="394" max="32767" attributes="0"/>
+                      <EmptySpace pref="116" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

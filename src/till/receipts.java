@@ -4,13 +4,9 @@
  */
 package till;
 
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -137,11 +133,19 @@ public class receipts extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshActionPerformed
 
     private void printReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReceiptActionPerformed
+        String text = parent.viewOrder(ordersTable);
+        parent.printReceipt(ordersTable, text);
         
     }//GEN-LAST:event_printReceiptActionPerformed
 
     private void viewOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewOrderActionPerformed
-        parent.viewOrder(ordersTable);
+        String receipt = parent.viewOrder(ordersTable);
+        JOptionPane.showMessageDialog(
+            null, // Parent component (null for center of screen)
+            receipt, // Message to display
+            "Receipt", // Title of the dialog window
+            JOptionPane.PLAIN_MESSAGE // Type of message
+        );
     }//GEN-LAST:event_viewOrderActionPerformed
 
 
