@@ -864,8 +864,9 @@ public class drinks extends javax.swing.JPanel {
     }//GEN-LAST:event_b10ActionPerformed
 
     private void b1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b1ActionPerformed
-        
-        //parent.addDrink(((JButton) evt.getSource()).getText(), "beer");
+        if(parent.isAvailable(parent.getButton(evt))){
+            parent.addDrink(parent.buttonName(evt), "beer");
+        }
     }//GEN-LAST:event_b1ActionPerformed
 
     private void onethirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_onethirdActionPerformed

@@ -562,7 +562,6 @@ public class main extends javax.swing.JFrame {
     }
     
     public JButton getButton(ActionEvent evt){
-        
         return ((JButton) evt.getSource());
     }
     
@@ -932,7 +931,9 @@ public class main extends javax.swing.JFrame {
                                 .addComponent(food, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(desserts, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE))
-                            .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
