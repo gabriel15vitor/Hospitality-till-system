@@ -35,6 +35,9 @@ public class receipts extends javax.swing.JPanel {
         refresh = new javax.swing.JButton();
         printReceipt = new javax.swing.JButton();
         viewOrder = new javax.swing.JButton();
+        orderByDate = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        findId = new javax.swing.JButton();
 
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -91,17 +94,48 @@ public class receipts extends javax.swing.JPanel {
             }
         });
 
+        orderByDate.setText("Order By Amount");
+        orderByDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderByDateActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Order by ID");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        findId.setText("Specific ID");
+        findId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(findId, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(orderByDate, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(43, 43, 43)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(viewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(viewOrder, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                     .addComponent(printReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -117,7 +151,14 @@ public class receipts extends javax.swing.JPanel {
                         .addComponent(viewOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(printReceipt, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(orderByDate, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(findId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -127,7 +168,10 @@ public class receipts extends javax.swing.JPanel {
     }//GEN-LAST:event_formFocusGained
 
     private void refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshActionPerformed
-        parent.updateTable(ordersTable, (preference.isEmpty() ? "`transaction_id`": preference));
+        parent.updateTable(ordersTable, (preference.isEmpty() ? "ORDER BY `transaction_id` DESC": preference));
+        if(!parent.quantityStr.isEmpty()){
+            parent.clearQuantity();
+        }
     }//GEN-LAST:event_refreshActionPerformed
 
     private void printReceiptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printReceiptActionPerformed
@@ -145,9 +189,47 @@ public class receipts extends javax.swing.JPanel {
         );
     }//GEN-LAST:event_viewOrderActionPerformed
 
+    private void orderByDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderByDateActionPerformed
+        preference = "ORDER BY total_amount DESC";
+    }//GEN-LAST:event_orderByDateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        preference = "";
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void findIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findIdActionPerformed
+        String removeDouble = "";// Get the quantity from the main class
+        int index = parent.quantityStr.indexOf(".");
+        int quantity=0, i=0;
+
+        //This if removes the decimal part of the string so it wont affect the size or price
+        if(index == -1){
+            quantity = parent.quantityStr.isEmpty() ? 0 : Integer.parseInt(parent.quantityStr);
+        }else{
+            while(i != index){
+                removeDouble += parent.quantityStr.charAt(i);
+                i++;
+            }
+            quantity = Integer.parseInt(removeDouble);
+        }
+        if(quantity != 0){
+            preference = "WHERE `transaction_id` =" + quantity;
+        }else{
+            JOptionPane.showMessageDialog(
+                null, // Parent component (null for center of screen)
+                "Insert ID", // Message to display
+                "Insert ID", // Title of the dialog window
+                JOptionPane.PLAIN_MESSAGE // Type of message
+            );
+        }        
+    }//GEN-LAST:event_findIdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton findId;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton orderByDate;
     private javax.swing.JTable ordersTable;
     private javax.swing.JButton printReceipt;
     private javax.swing.JButton refresh;

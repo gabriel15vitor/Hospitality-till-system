@@ -5,6 +5,8 @@
 package till;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
@@ -17,10 +19,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,9 +35,11 @@ public class main extends javax.swing.JFrame {
     private static final String url = "jdbc:mysql://localhost:3306/Hospitality";
     private static final String username = "root";
     private static final String password = "";
-    private String quantityStr = ""; // Shared quantity input
+    public String quantityStr = ""; // Shared quantity input
     ResultSet queryResult;
     String size = "";
+    String order="";
+    Boolean staff = false;
     public HashMap<String, HashMap<String, Double>> itemsPrices = new HashMap<>();
     public HashMap<String, Integer> ids = new HashMap<>();
     public Boolean block = null;
@@ -247,7 +253,12 @@ public class main extends javax.swing.JFrame {
     public void addFood(String name1){
         String name = name1.toLowerCase().replace(" ", "");
         DefaultTableModel model = (DefaultTableModel) table.getModel();
-        Double price = itemsPrices.get(name).get("");
+        Double price;
+        if(staff){
+            price = 0.0;
+        }else{
+            price = itemsPrices.get(name).get("");
+        }
         
         if(price != null){
             String removeDouble = "";// Get the quantity from the main class
@@ -321,7 +332,13 @@ public class main extends javax.swing.JFrame {
 
                 }
             }
-            Double price = r;
+            Double price;
+            if(staff){
+                price = 0.0;
+            }else{
+                price = r;
+            }
+            staff = false;
             DefaultTableModel model = (DefaultTableModel) table.getModel();
 
             if(price != null){
@@ -376,61 +393,62 @@ public class main extends javax.swing.JFrame {
     public void sendPayment(String type_of_payment){
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int rows = model.getRowCount();
-        String query="INSERT INTO `transactions`(`transaction_date`, `total_amount`, `items`, `Transaction_type`) VALUES ('replace Date','replace Total Amount','Replace items','type_of_payment');";
-        Double amount = null;
-        String items = "";
-        Boolean execute = false;
-        Double tableAmount;
-        
-        if("Total".equals(model.getValueAt(rows-1, 2).toString())){
-            tableAmount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
-            if(!quantityStr.isEmpty()){ amount = Double.parseDouble(quantityStr); }
-            if((quantityStr.isEmpty()) || ((tableAmount-amount) == 0)){
-                amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
-                for(int i=0; i < rows-1; i++){
-                    if(!model.getValueAt(i, 2).toString().equals("Paid")){
-                        int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
-                        for(int j=0; j < lastdigit;j++){
-                            items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""))+"<->"+ model.getValueAt(i, 1).toString() + " ";
+        if(rows != 0){
+            String query="INSERT INTO `transactions`(`transaction_date`, `total_amount`, `items`, `Transaction_type`) VALUES ('replace Date','replace Total Amount','Replace items','type_of_payment');";
+            Double amount = null;
+            String items = "";
+            Boolean execute = false;
+            Double tableAmount;
+            if("Total".equals(model.getValueAt(rows-1, 2).toString())){
+                tableAmount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+                if(!quantityStr.isEmpty()){ amount = Double.parseDouble(quantityStr); }
+                if((quantityStr.isEmpty()) || ((tableAmount-amount) == 0)){
+                    amount = Double.parseDouble(model.getValueAt(rows-1, 3).toString());
+                    for(int i=0; i < rows-1; i++){
+                        if(!model.getValueAt(i, 2).toString().equals("Paid")){
+                            int lastdigit = Integer.parseInt(model.getValueAt(i, 0).toString());
+                            for(int j=0; j < lastdigit;j++){
+                                items += ids.get(model.getValueAt(i, 2).toString().toLowerCase().replace(" ", ""))+"<->"+ model.getValueAt(i, 1).toString() + " ";
+                            }
+                        }else{
+                            amount += Double.parseDouble(model.getValueAt(i, 3).toString());
                         }
-                    }else{
-                        amount += Double.parseDouble(model.getValueAt(i, 3).toString());
                     }
-                }
-                for(int i=0; i < rows; i++){
-                    model.removeRow(0);
-                }
-                execute = true;
-            }else{
-                if((tableAmount-amount) != 0){
-                    if((tableAmount-amount) > 0){
-                        model.removeRow(rows-1);
-                        model.addRow(new Object[]{null, null, "Paid", amount});
-                        model.addRow(new Object[]{null, null, "Total", tableAmount-amount});
-                    }else{
-                        JOptionPane.showMessageDialog(
-                            null, // Parent component (null for center of screen)
-                            "The amount inserted is too high, try again.", // Message to display
-                            "Error", // Title of the dialog window
-                            JOptionPane.ERROR_MESSAGE // Type of message (ERROR_MESSAGE for error icon)
-                        );
+                    for(int i=0; i < rows; i++){
+                        model.removeRow(0);
+                    }
+                    execute = true;
+                }else{
+                    if((tableAmount-amount) != 0){
+                        if((tableAmount-amount) > 0){
+                            model.removeRow(rows-1);
+                            model.addRow(new Object[]{null, null, "Paid", amount});
+                            model.addRow(new Object[]{null, null, "Total", tableAmount-amount});
+                        }else{
+                            JOptionPane.showMessageDialog(
+                                null, // Parent component (null for center of screen)
+                                "The amount inserted is too high, try again.", // Message to display
+                                "Error", // Title of the dialog window
+                                JOptionPane.ERROR_MESSAGE // Type of message (ERROR_MESSAGE for error icon)
+                            );
+                        }
                     }
                 }
             }
+            if(execute){
+                query = query.replace("replace Date", getCurrentDateTime());
+                query = query.replace("replace Total Amount", amount.toString());
+                query = query.replace("Replace items", items.trim());
+                query = query.replace("type_of_payment", type_of_payment);
+                System.out.println(query);
+                insert(query);
+            }
+            clearQuantity(); 
         }
-        if(execute){
-            query = query.replace("replace Date", getCurrentDateTime());
-            query = query.replace("replace Total Amount", amount.toString());
-            query = query.replace("Replace items", items.trim());
-            query = query.replace("type_of_payment", type_of_payment);
-            System.out.println(query);
-            insert(query);
-        }
-        clearQuantity(); 
     }
     
     public void updateTable(JTable r, String preference){
-        queryResult = updateData("SELECT `transaction_id`, `transaction_date`, `total_amount`, `items`, `Transaction_type` FROM `transactions` ORDER BY preference DESC".replace("preference", preference));
+        queryResult = updateData("SELECT `transaction_id`, `transaction_date`, `total_amount`, `items`, `Transaction_type` FROM `transactions` preference LIMIT 30".replace("preference", preference));
         DefaultTableModel model = (DefaultTableModel) r.getModel();
         int i = model.getRowCount();
         while(i != 0){
@@ -455,6 +473,7 @@ public class main extends javax.swing.JFrame {
         try {
             String searchSize;
             int row = ordersTable.getSelectedRow();
+            ordersTable.clearSelection();
             var model = (DefaultTableModel) ordersTable.getModel();
             var transactionID = model.getValueAt(row, 0).toString();
             var query = "SELECT * FROM `transactions` WHERE `transaction_id` = insertID;".replace("insertID", transactionID);
@@ -607,9 +626,22 @@ public class main extends javax.swing.JFrame {
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
+            }
+        });
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
             }
         });
 
@@ -717,6 +749,11 @@ public class main extends javax.swing.JFrame {
 
         staffDrinks.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         staffDrinks.setText("Staff Food/Drink");
+        staffDrinks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffDrinksActionPerformed(evt);
+            }
+        });
 
         blockItem.setText("Block Item");
         blockItem.addActionListener(new java.awt.event.ActionListener() {
@@ -872,6 +909,11 @@ public class main extends javax.swing.JFrame {
         });
 
         quantityTextField.setEditable(false);
+        quantityTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityTextFieldActionPerformed(evt);
+            }
+        });
 
         point.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         point.setText(".");
@@ -1122,6 +1164,26 @@ public class main extends javax.swing.JFrame {
     private void enableItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableItemActionPerformed
         block = false;
     }//GEN-LAST:event_enableItemActionPerformed
+
+    private void quantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quantityTextFieldActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        
+    }//GEN-LAST:event_formKeyTyped
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formFocusGained
+
+    private void staffDrinksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffDrinksActionPerformed
+        staff = true;
+    }//GEN-LAST:event_staffDrinksActionPerformed
 
     /**
      * @param args the command line arguments
