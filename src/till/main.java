@@ -601,8 +601,6 @@ public class main extends javax.swing.JFrame {
         configPanel = new javax.swing.JPanel();
         corret = new javax.swing.JButton();
         paidOrders = new javax.swing.JButton();
-        refund = new javax.swing.JButton();
-        refundBack = new javax.swing.JButton();
         pay = new javax.swing.JButton();
         updateTill = new javax.swing.JButton();
         staffDrinks = new javax.swing.JButton();
@@ -725,12 +723,6 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        refund.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        refund.setText("Refund");
-
-        refundBack.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        refundBack.setText("Refund back to Stock");
-
         pay.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         pay.setText("Pay");
         pay.addActionListener(new java.awt.event.ActionListener() {
@@ -780,10 +772,8 @@ public class main extends javax.swing.JFrame {
                         .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(enableItem, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(refundBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(corret, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(staffDrinks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(refund, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(staffDrinks, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
                         .addGap(0, 6, Short.MAX_VALUE))
                     .addGroup(configPanelLayout.createSequentialGroup()
                         .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -803,11 +793,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(corret, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(paidOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(refund, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refundBack, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(101, 101, 101)
                 .addComponent(staffDrinks, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(configPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1236,8 +1222,6 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JButton pay;
     private javax.swing.JButton point;
     private javax.swing.JTextField quantityTextField;
-    private javax.swing.JButton refund;
-    private javax.swing.JButton refundBack;
     private javax.swing.JTextField sizeDisplay;
     private javax.swing.JButton staffDrinks;
     public javax.swing.JTable table;
